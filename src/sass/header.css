@@ -1,0 +1,32 @@
+.header-block {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 100px;
+  width: 100%;
+  max-width: 1920px;
+  padding: 0 35px;
+  background-color: #343A40;
+}
+
+.header-block__menu {
+  color: #000;
+  padding: 5px;
+  border: 1px solid #000;
+  border-radius: 5px;
+  cursor: pointer;
+  -webkit-transition: 0.3s all;
+  transition: 0.3s all;
+}
+
+.header-block__menu:hover {
+  color: #6e6c6c;
+  border-color: #6e6c6c;
+}
+/*# sourceMappingURL=header.css.map */
