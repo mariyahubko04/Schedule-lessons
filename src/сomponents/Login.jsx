@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import { getDates } from '../../api/getDates';
+import { getDates } from '../api/getDates';
 
 export const Login = () => {
   const [datas, setDates] = useState({});
@@ -15,13 +15,14 @@ export const Login = () => {
         console.error(err);
       }
     })();
-  }, [])
+  }, []);
 
   return <div className='login-block'>
-    <div className='login-block__img'>
-      <img src="images/login.png" alt='login' />
+    <div className='login-block__title'>
+      Увійти або Зареєструватися
     </div>
 
+    <div className='login-block__section'>
     <form className='login-block__form'>
       <div className='login-block__form--field'>
         <input type='email'
@@ -58,5 +59,8 @@ export const Login = () => {
         Login
         </button>
     </form>
+
+    <form></form>
+    </div>
   </div>;
 };
