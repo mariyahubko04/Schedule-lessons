@@ -39,13 +39,18 @@
 
       a {
         color: $title-text-color;
+        height: 100%;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
     }
 
     .login-link {
       margin-left: 7px;
       background: $background-color;
-      
+
       a {
         color: $additional-color;
       }

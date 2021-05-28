@@ -113,10 +113,11 @@
   -webkit-box-pack: end;
       -ms-flex-pack: end;
           justify-content: flex-end;
-  -ms-grid-columns: (50px)[3];
-      grid-template-columns: repeat(3, 50px);
-  -webkit-column-gap: 10px;
-          column-gap: 10px;
+  -ms-grid-columns: 50px 30px 30px;
+      grid-template-columns: 50px 30px 30px;
+  -webkit-column-gap: 20px;
+          column-gap: 20px;
+  margin-right: 10px;
 }
 
 .footer .footer__nav--social-block img {
@@ -130,5 +131,15 @@
 
 .footer__icon img {
   height: inherit;
+}
+
+.footer__social--facebook, .footer__social--instagram {
+  height: 35px;
+  width: 35px;
+}
+
+.footer__social--facebook img, .footer__social--instagram img {
+  height: inherit;
+  background-color: transparent;
 }
 /*# sourceMappingURL=footer.css.map */

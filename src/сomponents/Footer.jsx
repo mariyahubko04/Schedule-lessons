@@ -7,10 +7,10 @@ export const Footer = () => (
                 <div className="footer__section--main-info">
                     <div class="footer__nav">
                         <div class="footer__nav--social-block">
-                            <a class="footer__icon" href="#">
+                            <a className="footer__icon" href="#">
                                 <img src="images/icon.png" alt="twitter-icon" />
                             </a>
-                            <a href="#">
+                            <a className="footer__social--facebook" href="#">
                                 <img
                                     src="images/facebook.svg"
                                     alt="facebook-icon"

@@ -88,5 +88,10 @@
         opacity: 0.25;
       }
     }
+
+     li.slick-active button:before {
+       opacity: .75 !important;
+       color: #000;
+     }
   }
 }

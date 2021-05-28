@@ -25,7 +25,7 @@ export const Header = () => <div className='header'>
         </li>
 
         <li className='header__block--navbar--link login-link flex-center'>
-          <NavLink className="navlink" to="/login" exact>
+          <NavLink className="navlink" to="/" exact>
             Вхід
           </NavLink>
         </li>

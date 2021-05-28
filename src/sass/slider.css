@@ -90,4 +90,9 @@
   border-radius: 50%;
   opacity: 0.25;
 }
+
+.container .slick-dots li.slick-active button:before {
+  opacity: .75 !important;
+  color: #000;
+}
 /*# sourceMappingURL=slider.css.map */
