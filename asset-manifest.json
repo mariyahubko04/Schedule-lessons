@@ -1,16 +1,19 @@
 {
   "files": {
-    "main.css": "/Schedule-lessons/static/css/main.32c255aa.chunk.css",
-    "main.js": "/Schedule-lessons/static/js/main.03f0ac3c.chunk.js",
-    "main.js.map": "/Schedule-lessons/static/js/main.03f0ac3c.chunk.js.map",
+    "main.css": "/Schedule-lessons/static/css/main.59a196f6.chunk.css",
+    "main.js": "/Schedule-lessons/static/js/main.f2f437c4.chunk.js",
+    "main.js.map": "/Schedule-lessons/static/js/main.f2f437c4.chunk.js.map",
     "runtime~main.js": "/Schedule-lessons/static/js/runtime~main.18c0cfe2.js",
     "runtime~main.js.map": "/Schedule-lessons/static/js/runtime~main.18c0cfe2.js.map",
-    "static/js/2.4b0441ad.chunk.js": "/Schedule-lessons/static/js/2.4b0441ad.chunk.js",
-    "static/js/2.4b0441ad.chunk.js.map": "/Schedule-lessons/static/js/2.4b0441ad.chunk.js.map",
+    "static/css/2.ab2304d9.chunk.css": "/Schedule-lessons/static/css/2.ab2304d9.chunk.css",
+    "static/js/2.66f4673f.chunk.js": "/Schedule-lessons/static/js/2.66f4673f.chunk.js",
+    "static/js/2.66f4673f.chunk.js.map": "/Schedule-lessons/static/js/2.66f4673f.chunk.js.map",
     "index.html": "/Schedule-lessons/index.html",
-    "precache-manifest.89377f52b30ab8f776716567c0139b39.js": "/Schedule-lessons/precache-manifest.89377f52b30ab8f776716567c0139b39.js",
+    "precache-manifest.667ca385e6a1151a3d54495c8f889ec7.js": "/Schedule-lessons/precache-manifest.667ca385e6a1151a3d54495c8f889ec7.js",
     "service-worker.js": "/Schedule-lessons/service-worker.js",
-    "static/css/main.32c255aa.chunk.css.map": "/Schedule-lessons/static/css/main.32c255aa.chunk.css.map",
-    "static/media/App.css": "/Schedule-lessons/static/media/slide-3.af6966d9.jpg"
+    "static/css/2.ab2304d9.chunk.css.map": "/Schedule-lessons/static/css/2.ab2304d9.chunk.css.map",
+    "static/css/main.59a196f6.chunk.css.map": "/Schedule-lessons/static/css/main.59a196f6.chunk.css.map",
+    "static/media/App.css": "/Schedule-lessons/static/media/FuturaPT-Medium.995c64e1.woff",
+    "static/media/slick-theme.css": "/Schedule-lessons/static/media/slick.f97e3bbf.svg"
   }
 }
