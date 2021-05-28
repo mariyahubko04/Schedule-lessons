@@ -1,66 +1,34 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 
-import { getDates } from '../api/getDates';
+import { LoginForm } from "./LoginPage/LoginForm";
+import { AuthorizationForm } from "./LoginPage/AuthorizationForm";
+import { getDates } from "../api/getDates";
 
 export const Login = () => {
-  const [datas, setDates] = useState({});
-  const [showPassword, setShowPassword] = useState(false);
+    const [datas, setDates] = useState({});
 
-  useEffect(() => {
-    (async () => {
-      try {
-        const datas = await getDates();
-        setDates(datas);
-      } catch (err) {
-        console.error(err);
-      }
-    })();
-  }, []);
+    useEffect(() => {
+        (async () => {
+            try {
+                const datas = await getDates();
+                setDates(datas);
+            } catch (err) {
+                console.error(err);
+            }
+        })();
+    }, []);
 
-  return <div className='login-block'>
-    <div className='login-block__title'>
-      Увійти або Зареєструватися
-    </div>
+    return (
+        <div className="login-block">
+            <div className="login-block__title">Увійти або Зареєструватися</div>
 
-    <div className='login-block__section'>
-    <form className='login-block__form'>
-      <div className='login-block__form--field'>
-        <input type='email'
-          id='email'
-          maxLength={50}
-          required
-        />
-        <label
-          for='email'
-          className='login-block__form--field-label'
-        >
-          Email
-        </label>
-      </div>
+            <div className="login-block__section">
+                <LoginForm />
 
-      <div className='login-block__form--field'>
-        <input
-          id='password'
-          maxLength={50}
-          type={showPassword ? 'text' : 'password'}
-        />
-        <label
-          className='login-block__form--field-label'
-          for='password'
-        >
-          Password
-      </label>
-      </div>
+                <div className='login-block__section--line' />
 
-      <button
-        className="btn login-block__form--field-btn-login"
-        type="submit"
-      >
-        Login
-        </button>
-    </form>
-
-    <form></form>
-    </div>
-  </div>;
+                <AuthorizationForm />
+            </div>
+        </div>
+    );
 };

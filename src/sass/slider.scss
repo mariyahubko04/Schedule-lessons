@@ -1,56 +1,86 @@
 @import './variable.scss';
 
-.slide-block {
-  position: relative;
+.container {
+  width: 100%;
+  max-width: 100vw;
+  height: $slider-height;
   margin-bottom: 25px;
+  padding: 0;
+  background: #419be0;
+  position: relative;
 
-  &__btn {
+  .slick-slider {
+    height: 100%;
+  }
+
+  .slick-initialized .slick-slide {
+    max-height: $slider-height;
+  }
+
+  .slick-slide img {
+    margin: auto;
+    height: $slider-height;
+    width: 100%;
+  }
+
+  .slick-arrow {
     justify-content: center;
     height: 70px;
     width: 70px;
     border: 1px solid transparent;
     border-radius: 50%;
     position: absolute;
-    bottom: 15px;
+    top: 90%;
     background: #11111166;
     cursor: pointer;
     transition: all .3s;
+    z-index: 3;
+  }
 
-    &:hover {
-      background: #111;
+  .slick-next {
+    right: 45px;
+
+    &:before {
+      content: url("images/right.png");
     }
+  }
 
-    img {
-      height: 30px;
+  .slick-prev {
+    left: 45px;
+
+    &:before {
+      content: url("images/left.png");
     }
   }
 
-  .prev-btn {
-    left: 25px;
+  .slick-prev:hover, .slick-next:hover {
+    background: #111;
   }
 
-  .next-btn {
-    right: 25px;
+  .slick-prev:focus, .slick-next:focus {
+    background: #11111166;
+    outline: none;
   }
 
-  &__status {
-    position: absolute;
-    right: calc(50% - 60px);
-    bottom: 30px;
+  .slick-dots {
+    bottom: 45px;
 
-    &--item {
-      display: flex;
+    li {
       height: 30px;
       width: 30px;
       background: #11111166;
       border-radius: 50%;
-      transition: all .3s;
       margin: 0 5px;
+      transition: all .3s;
+    }
 
-      &:after {
+    li button {
+      &::before {
         content: '';
         display: block;
         margin: auto;
+        left: calc(50% - 7.5px);
+        top: calc(50% - 7.5px);
         height: 15px;
         width: 15px;
         background: $title-text-color;
@@ -58,30 +88,5 @@
         opacity: 0.25;
       }
     }
-
-    &--item.active {
-      &:after {
-        opacity: 1;
-      }
-    }
-  }
-
-  &__img {
-    height: 670px;
-    width: 100%;
-    background-size: cover;
-    background-repeat: no-repeat;
-  }
-
-  .slide-1 {
-    background-image: url(images/slide-1.png);
-  }
-
-  .slide-2 {
-    background-image: url(images/slide-2.jpg);
-  }
-
-  .slide-3 {
-    background-image: url(images/slide-3.jpg);
   }
 }

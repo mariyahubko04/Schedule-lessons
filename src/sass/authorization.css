@@ -1,0 +1,51 @@
+.authorization-block__form--field {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (1fr)[2];
+      grid-template-columns: repeat(2, 1fr);
+  -webkit-column-gap: 30px;
+          column-gap: 30px;
+  row-gap: 8px;
+  margin-bottom: 8px;
+  width: 100%;
+}
+
+.authorization-block__form--field-label {
+  row-gap: 8px;
+  margin: 0;
+}
+
+.authorization-block__form--field input:not([type='checkbox']) {
+  display: block;
+  min-width: 270px;
+  width: 100%;
+  max-width: 300px;
+  height: 48px;
+}
+
+.authorization-block__form--field-label--checked {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 25px 1fr;
+      grid-template-columns: 25px 1fr;
+  -webkit-column-gap: 10px;
+          column-gap: 10px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  justify-items: flex-start;
+  height: 100%;
+  white-space: nowrap;
+}
+
+.authorization-block__form--field-label--checked input {
+  margin-left: 5px;
+  -webkit-transform: scale(2);
+          transform: scale(2);
+  cursor: pointer;
+}
+
+.authorization-block__form--field-btn-login {
+  margin-top: 15px;
+}
+/*# sourceMappingURL=authorization.css.map */

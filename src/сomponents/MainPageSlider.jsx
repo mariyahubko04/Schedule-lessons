@@ -1,50 +1,23 @@
-import React from 'react';
-import { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import React from "react";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 export const MainPageSlider = () => {
-  const countImage = 3;
-  const [numberShowImage, setNumberShowImage] = useState(1);
+    const images = ["slide-1.png", "slide-2.jpg", "slide-3.jpg"];
+    const settings = {
+        dots: true,
+    };
 
-  const handleChangeImg = (isNext) => {
-      setNumberShowImage((number) => {
-          if (isNext) {
-              if (number === countImage) return 1;
-              return number + 1;
-          } else {
-              if (number === 1) return countImage;
-              return number - 1;
-          }
-      });
-  };
-
-  return <div className='slide-block'>
-      <div 
-        className='slide-block__btn prev-btn flex-center'
-        onClick={() => handleChangeImg(false)}
-      >
-        <img 
-          src={`images/left.png`}
-          alt='left icon'
-        />
-      </div>
-
-      <div className={`slide-block__img slide-${numberShowImage}`} />
-
-      <div className='slide-block__status flex-center'>
-        <span className={`slide-block__status--item ${numberShowImage === 1 ? 'active' : ''}`} />
-        <span className={`slide-block__status--item ${numberShowImage === 2 ? 'active' : ''}`} />
-        <span className={`slide-block__status--item ${numberShowImage === 3 ? 'active' : ''}`} />
-      </div>
-
-      <div 
-        className='slide-block__btn next-btn flex-center'
-        onClick={() => handleChangeImg(true)}
-      >
-        <img 
-          src={`images/right.png`}
-          alt='right icon'
-        />
-      </div>
-  </div>;
-}
+    return (
+        <div className="container">
+            <Slider {...settings}>
+                {images.map((image) => (
+                    <div key={image}>
+                        <img src={`images/${image}`} />
+                    </div>
+                ))}
+            </Slider>
+        </div>
+    );
+};
