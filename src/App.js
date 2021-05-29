@@ -4,7 +4,6 @@ import { HashRouter, Route, Switch } from 'react-router-dom';
 
 import { Login } from './сomponents/Login.jsx';
 import { Footer } from './сomponents/Footer.jsx';
-import { MainPageSlider } from './сomponents/MainPageSlider.jsx';
 import { HomePage } from './сomponents/HomePage.jsx';
 import { NotFoundPage } from './сomponents/NotFoundPage.jsx';
 import { Header } from './сomponents/Header.jsx';

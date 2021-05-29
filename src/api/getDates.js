@@ -1,8 +1,28 @@
-export const getDates = async() => {
-  const url = 'http://easyschedule.tk/api/test';
+import axios from 'axios';
+const URL = 'http://easyschedule.tk/api';
 
-  const response = await fetch(url);
-  const data = await response.json();
+axios.defaults.baseURL = URL;
+
+export const getGroups = async () => {
+  const response = await axios.get('/group');
+  //const response = await fetch(url);
+  console.log('response', response);
+  const data = await response.data;
 
   return data;
+};
+
+export const getSheduleByGroup = async (idGroup) => {
+  // //const url = `${URL}/schedule/group/${idGroup}`;
+
+  // const response = axios({
+  //   method: 'get',
+  //   url: url
+  // });
+
+  // //const response = await fetch(url);
+  // console.log('response', response);
+  // const data = await response.json();
+
+  // return data;
 };

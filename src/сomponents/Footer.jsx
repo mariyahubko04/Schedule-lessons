@@ -5,8 +5,8 @@ export const Footer = () => (
         <section className="footer__section">
             <div className="footer__section--block">
                 <div className="footer__section--main-info">
-                    <div class="footer__nav">
-                        <div class="footer__nav--social-block">
+                    <div className="footer__nav">
+                        <div className="footer__nav--social-block">
                             <a className="footer__icon" href="#">
                                 <img src="images/icon.png" alt="twitter-icon" />
                             </a>
@@ -16,7 +16,7 @@ export const Footer = () => (
                                     alt="facebook-icon"
                                 />
                             </a>
-                            <a class="footer__social--instagram" href="#">
+                            <a className="footer__social--instagram" href="#">
                                 <img
                                     src="images/instagram.svg"
                                     alt="instagram-icon"
