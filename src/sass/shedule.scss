@@ -1,0 +1,235 @@
+@import './variable.scss';
+
+.shedule-block {
+  &__select-group {
+    width: 450px;
+    margin: 0 auto 25px;
+
+    &--lable {
+      width: 100%;
+      font-size: 27px;
+      text-align: center;
+      font-variant: all-small-caps;
+      font-weight: 600;
+    }
+
+    .css-yk16xz-control,
+    .css-1pahdxg-control {
+      border: 2px solid $gray;
+    }
+
+    .css-tlfecz-indicatorContainer {
+      color: $gray;
+    }
+
+    .css-1okebmr-indicatorSeparator {
+      width: 2px;
+      background-color: $gray;
+    }
+    }
+
+  div &__section {
+    grid-template-columns: repeat(3, 350px);
+    grid-row-gap: 25px;
+    row-gap: 25px;
+    justify-content: center;
+    margin-bottom: 75px;
+  }
+
+  &__section--weeks {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &-item {
+      display: block;
+      padding: 3px 40px;
+      border: 2px solid $gray;
+      font-size: 26px;
+      font-weight: 500;
+      color: $gray;
+      cursor: pointer;
+
+      &.active {
+        color: $title-text-color;
+        background: red;
+      }
+
+      &:first-child {
+        border-right: none;
+      }
+
+      &:last-child {
+        border-left: none;
+      }
+    }
+  }
+
+  &__section--one-day {
+    opacity: 0.4;
+    min-width: 300px;
+    text-align: center;
+
+    &--lesson-block {
+    &:nth-child(1),
+    &:nth-child(8) {
+      .shedule-block__section--one-day--lesson-block--subject-cabinet {
+        background: $additional-color;
+      }
+
+      .shedule-block__section--one-day--lesson-block--subject-name::before {
+        background: $additional-color;
+      }
+    }
+
+    &:nth-child(2),
+    &:nth-child(9) {
+      .shedule-block__section--one-day--lesson-block--subject-cabinet {
+        background: $green;
+      }
+
+      .shedule-block__section--one-day--lesson-block--subject-name::before {
+        background: $green;
+      }
+    }
+
+    &:nth-child(9) {
+      .shedule-block__section--one-day--lesson-block--time:not(:last-child)::before {
+        background: transparent;
+      }
+    }
+
+    &:nth-child(3),
+    &:nth-child(7) {
+      .shedule-block__section--one-day--lesson-block--subject-cabinet {
+        background: rgb(0, 2, 122);
+      }
+
+      .shedule-block__section--one-day--lesson-block--subject-name::before {
+        background: rgb(0, 2, 122);;
+      }
+    }
+
+    &:nth-child(4) {
+      .shedule-block__section--one-day--lesson-block--subject-cabinet {
+        background: red;
+      }
+
+      .shedule-block__section--one-day--lesson-block--subject-name::before {
+        background: red;
+      }
+    }
+
+    &:nth-child(5) {
+      .shedule-block__section--one-day--lesson-block--subject-cabinet {
+        background: rgb(24, 187, 179);
+      }
+
+      .shedule-block__section--one-day--lesson-block--subject-name::before {
+        background: rgb(24, 187, 179);;
+      }
+    }
+
+    &:nth-child(6) {
+      .shedule-block__section--one-day--lesson-block--subject-cabinet {
+        background: orange;
+      }
+
+      .shedule-block__section--one-day--lesson-block--subject-name::before {
+        background: orange;
+      }
+    }
+  }
+
+    &--lesson-block.empty {
+      .shedule-block__section--one-day--lesson-block--subject-cabinet {
+        background: $gray;
+      }
+
+      .shedule-block__section--one-day--lesson-block--subject-name::before {
+        background: $gray;
+      }
+    }
+
+    &--name {
+      font-size: 40px;
+      font-weight: 600;
+      color: black;
+    }
+
+    &--lesson-block {
+      display: grid;
+      grid-template-columns: 70px 1fr;
+      column-gap: 10px;
+      margin-top: 10px;
+    }
+
+    &--lesson-block--time {
+      display: flex;
+      flex-direction: column;
+      font-weight: bold;
+      font-variant: small-caps;
+      line-height: 1.2;
+      color: rgba(0, 0, 0, 0.749);
+      position: relative;
+
+      &:not(:last-child)::before {
+        content: '';
+        width: 1.5px;
+        height: 25px;
+        display: block;
+        position: absolute;
+        bottom: 0;
+        right: calc(50% - 1px);
+        background: rgba(0, 0, 0, 0.749);;
+      }
+
+      & span:first-child {
+        margin-bottom: 8px;
+      }
+    }
+
+    &--lesson-block--subject {
+      display: grid;
+      width: 100%;
+      justify-items: flex-end;
+    }
+
+    &--lesson-block--subject-name {
+      height: 50px;
+      width: 100%;
+      border: 2px solid $gray;
+      padding: 5px 15px;
+      font-size: 25px;
+      font-weight: 600;
+      text-align: start;
+      position: relative;
+
+      &::before {
+        content: '';
+        width: 12px;
+        height: 65px;
+        display: block;
+        position: absolute;
+        left: -12px;
+        top: -10px;
+      }
+    }
+
+    &--lesson-block--subject-cabinet {
+      width: 90%;
+      border: 2px solid $gray;
+      border-top: none;
+      text-align: center;
+      color: $title-text-color;
+    }
+  }
+
+  &__section--one-day.active {
+    opacity: 1;
+
+    .shedule-block__section--one-day--name {
+      color: red;
+    }
+  }
+}

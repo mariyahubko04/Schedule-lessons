@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-export const Header = () => <div className='header'>
+export const Header = () => <header className='header'>
   <div className='header__block flex-center'>
     <div className='header__block--logo flex-center'>
       <img
@@ -25,15 +25,11 @@ export const Header = () => <div className='header'>
         </li>
 
         <li className='header__block--navbar--link login-link flex-center'>
-          <NavLink className="navlink" to="/" exact>
+          <NavLink className="navlink" to="/login" exact>
             Вхід
           </NavLink>
         </li>
       </ul>
     </nav>
   </div>
-
-  <div className='header__additional-block'>
-    Розпочни відстеження своїх досягнень разом з нами!
-  </div>
-</div>;
+</header>;

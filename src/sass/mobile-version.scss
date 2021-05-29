@@ -30,7 +30,8 @@
   }
 
   .header__additional-block,
-  .login-block__title {
+  .login-block__title,
+  .shedule-block__title {
     font-size: 20px;
   }
 
@@ -93,7 +94,8 @@
 @media screen and (max-width: 550px) {
 
   .header__additional-block,
-  .login-block__title {
+  .login-block__title,
+  .shedule-block__title {
     font-size: 18px;
   }
 
@@ -164,7 +166,8 @@
 @media screen and (max-width: 430px) {
 
   .header__additional-block,
-  .login-block__title {
+  .login-block__title,
+  .shedule-block__title {
     font-size: 16px;
   }
 
@@ -227,7 +230,8 @@
 
 @media screen and (max-width: 380px) {
   .header__additional-block,
-  .login-block__title {
+  .login-block__title,
+  .shedule-block__title {
     font-size: 15px;
   }
 

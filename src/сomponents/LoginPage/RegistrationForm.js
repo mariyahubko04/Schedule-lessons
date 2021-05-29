@@ -1,7 +1,7 @@
 import React from "react";
 import PhoneInput from 'react-phone-number-input/input';
 
-export const AuthorizationForm = () => {
+export const RegistrationForm = () => {
   return (
     <div>
       <h2>Зареєструватися</h2>

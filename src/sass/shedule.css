@@ -1,0 +1,229 @@
+.shedule-block__select-group {
+  width: 450px;
+  margin: 0 auto 25px;
+}
+
+.shedule-block__select-group--lable {
+  width: 100%;
+  font-size: 27px;
+  text-align: center;
+  font-variant: all-small-caps;
+  font-weight: 600;
+}
+
+.shedule-block__select-group .css-yk16xz-control,
+.shedule-block__select-group .css-1pahdxg-control {
+  border: 2px solid #aaaaaa;
+}
+
+.shedule-block__select-group .css-tlfecz-indicatorContainer {
+  color: #aaaaaa;
+}
+
+.shedule-block__select-group .css-1okebmr-indicatorSeparator {
+  width: 2px;
+  background-color: #aaaaaa;
+}
+
+div .shedule-block__section {
+  -ms-grid-columns: (350px)[3];
+      grid-template-columns: repeat(3, 350px);
+  grid-row-gap: 25px;
+  row-gap: 25px;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin-bottom: 75px;
+}
+
+.shedule-block__section--weeks {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.shedule-block__section--weeks-item {
+  display: block;
+  padding: 3px 40px;
+  border: 2px solid #aaaaaa;
+  font-size: 26px;
+  font-weight: 500;
+  color: #aaaaaa;
+  cursor: pointer;
+}
+
+.shedule-block__section--weeks-item.active {
+  color: #fff;
+  background: red;
+}
+
+.shedule-block__section--weeks-item:first-child {
+  border-right: none;
+}
+
+.shedule-block__section--weeks-item:last-child {
+  border-left: none;
+}
+
+.shedule-block__section--one-day {
+  opacity: 0.4;
+  min-width: 300px;
+  text-align: center;
+}
+
+.shedule-block__section--one-day--lesson-block:nth-child(1) .shedule-block__section--one-day--lesson-block--subject-cabinet, .shedule-block__section--one-day--lesson-block:nth-child(8) .shedule-block__section--one-day--lesson-block--subject-cabinet {
+  background: #0398fd;
+}
+
+.shedule-block__section--one-day--lesson-block:nth-child(1) .shedule-block__section--one-day--lesson-block--subject-name::before, .shedule-block__section--one-day--lesson-block:nth-child(8) .shedule-block__section--one-day--lesson-block--subject-name::before {
+  background: #0398fd;
+}
+
+.shedule-block__section--one-day--lesson-block:nth-child(2) .shedule-block__section--one-day--lesson-block--subject-cabinet, .shedule-block__section--one-day--lesson-block:nth-child(9) .shedule-block__section--one-day--lesson-block--subject-cabinet {
+  background: #009036;
+}
+
+.shedule-block__section--one-day--lesson-block:nth-child(2) .shedule-block__section--one-day--lesson-block--subject-name::before, .shedule-block__section--one-day--lesson-block:nth-child(9) .shedule-block__section--one-day--lesson-block--subject-name::before {
+  background: #009036;
+}
+
+.shedule-block__section--one-day--lesson-block:nth-child(9) .shedule-block__section--one-day--lesson-block--time:not(:last-child)::before {
+  background: transparent;
+}
+
+.shedule-block__section--one-day--lesson-block:nth-child(3) .shedule-block__section--one-day--lesson-block--subject-cabinet, .shedule-block__section--one-day--lesson-block:nth-child(7) .shedule-block__section--one-day--lesson-block--subject-cabinet {
+  background: #00027a;
+}
+
+.shedule-block__section--one-day--lesson-block:nth-child(3) .shedule-block__section--one-day--lesson-block--subject-name::before, .shedule-block__section--one-day--lesson-block:nth-child(7) .shedule-block__section--one-day--lesson-block--subject-name::before {
+  background: #00027a;
+}
+
+.shedule-block__section--one-day--lesson-block:nth-child(4) .shedule-block__section--one-day--lesson-block--subject-cabinet {
+  background: red;
+}
+
+.shedule-block__section--one-day--lesson-block:nth-child(4) .shedule-block__section--one-day--lesson-block--subject-name::before {
+  background: red;
+}
+
+.shedule-block__section--one-day--lesson-block:nth-child(5) .shedule-block__section--one-day--lesson-block--subject-cabinet {
+  background: #18bbb3;
+}
+
+.shedule-block__section--one-day--lesson-block:nth-child(5) .shedule-block__section--one-day--lesson-block--subject-name::before {
+  background: #18bbb3;
+}
+
+.shedule-block__section--one-day--lesson-block:nth-child(6) .shedule-block__section--one-day--lesson-block--subject-cabinet {
+  background: orange;
+}
+
+.shedule-block__section--one-day--lesson-block:nth-child(6) .shedule-block__section--one-day--lesson-block--subject-name::before {
+  background: orange;
+}
+
+.shedule-block__section--one-day--lesson-block.empty .shedule-block__section--one-day--lesson-block--subject-cabinet {
+  background: #aaaaaa;
+}
+
+.shedule-block__section--one-day--lesson-block.empty .shedule-block__section--one-day--lesson-block--subject-name::before {
+  background: #aaaaaa;
+}
+
+.shedule-block__section--one-day--name {
+  font-size: 40px;
+  font-weight: 600;
+  color: black;
+}
+
+.shedule-block__section--one-day--lesson-block {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 70px 1fr;
+      grid-template-columns: 70px 1fr;
+  -webkit-column-gap: 10px;
+          column-gap: 10px;
+  margin-top: 10px;
+}
+
+.shedule-block__section--one-day--lesson-block--time {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  font-weight: bold;
+  font-variant: small-caps;
+  line-height: 1.2;
+  color: rgba(0, 0, 0, 0.749);
+  position: relative;
+}
+
+.shedule-block__section--one-day--lesson-block--time:not(:last-child)::before {
+  content: '';
+  width: 1.5px;
+  height: 25px;
+  display: block;
+  position: absolute;
+  bottom: 0;
+  right: calc(50% - 1px);
+  background: rgba(0, 0, 0, 0.749);
+}
+
+.shedule-block__section--one-day--lesson-block--time span:first-child {
+  margin-bottom: 8px;
+}
+
+.shedule-block__section--one-day--lesson-block--subject {
+  display: -ms-grid;
+  display: grid;
+  width: 100%;
+  justify-items: flex-end;
+}
+
+.shedule-block__section--one-day--lesson-block--subject-name {
+  height: 50px;
+  width: 100%;
+  border: 2px solid #aaaaaa;
+  padding: 5px 15px;
+  font-size: 25px;
+  font-weight: 600;
+  text-align: start;
+  position: relative;
+}
+
+.shedule-block__section--one-day--lesson-block--subject-name::before {
+  content: '';
+  width: 12px;
+  height: 65px;
+  display: block;
+  position: absolute;
+  left: -12px;
+  top: -10px;
+}
+
+.shedule-block__section--one-day--lesson-block--subject-cabinet {
+  width: 90%;
+  border: 2px solid #aaaaaa;
+  border-top: none;
+  text-align: center;
+  color: #fff;
+}
+
+.shedule-block__section--one-day.active {
+  opacity: 1;
+}
+
+.shedule-block__section--one-day.active .shedule-block__section--one-day--name {
+  color: red;
+}
+/*# sourceMappingURL=shedule.css.map */

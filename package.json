@@ -17,6 +17,7 @@
     "react-phone-number-input": "^3.1.23",
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.0.1",
+    "react-select": "^4.3.1",
     "react-slick": "^0.28.1",
     "slick-carousel": "^1.8.1"
   },

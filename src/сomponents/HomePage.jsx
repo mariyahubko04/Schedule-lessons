@@ -1,3 +1,18 @@
-import React from 'react';
+import React from "react";
 
-export const HomePage = () => <div>HomePage</div>;
+import { MainPageSlider } from "./MainPageSlider";
+import { SheduleBlock } from "./SheduleBlock";
+
+export const HomePage = () => {
+    return (
+        <>
+            <div className="header__additional-block">
+                Розпочни відстеження своїх досягнень разом з нами!
+            </div>
+
+            <MainPageSlider />
+
+            <SheduleBlock />
+        </>
+    );
+};

@@ -65,7 +65,8 @@
 }
 
 .header__additional-block,
-.login-block__title {
+.login-block__title,
+.shedule-block__title {
   height: 50px;
   background: #0398fd;
   color: #fff;

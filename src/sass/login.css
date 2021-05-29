@@ -1,8 +1,8 @@
-.login-block, .authorization-block {
+.login-block, .authorization-block, .shedule-block {
   margin-bottom: 40px;
 }
 
-.login-block__section, .authorization-block__section {
+.login-block__section, .authorization-block__section, .shedule-block__section {
   display: -ms-grid;
   display: grid;
   -ms-grid-columns: 1fr 0.1fr 1fr;
@@ -16,20 +16,20 @@
   margin-top: 25px;
 }
 
-.login-block__section h2, .authorization-block__section h2 {
+.login-block__section h2, .authorization-block__section h2, .shedule-block__section h2 {
   text-align: center;
   font-size: 40px;
   font-weight: 600;
 }
 
-.login-block__section--line, .authorization-block__section--line {
+.login-block__section--line, .authorization-block__section--line, .shedule-block__section--line {
   margin-top: 25px;
   width: 2px;
   height: 85%;
   background-color: #111;
 }
 
-.login-block__form, .authorization-block__form {
+.login-block__form, .authorization-block__form, .shedule-block__form {
   display: -ms-grid;
   display: grid;
   -webkit-box-align: center;
@@ -40,14 +40,14 @@
   margin: 30px 0;
 }
 
-.login-block__form--field, .login-block__form--field-label--name-section, .authorization-block__form--field, .authorization-block__form--field-label--name-section {
+.login-block__form--field, .login-block__form--field-label--name-section, .authorization-block__form--field, .authorization-block__form--field-label--name-section, .shedule-block__form--field, .shedule-block__form--field-label--name-section {
   position: relative;
   margin-bottom: 20px;
   display: -ms-grid;
   display: grid;
 }
 
-.login-block__form--field-label, .login-block__form--field-label--name-section-label, .authorization-block__form--field-label, .authorization-block__form--field-label--name-section-label {
+.login-block__form--field-label, .login-block__form--field-label--name-section-label, .authorization-block__form--field-label, .authorization-block__form--field-label--name-section-label, .shedule-block__form--field-label, .shedule-block__form--field-label--name-section-label {
   display: -ms-grid;
   display: grid;
   text-align: center;
@@ -58,12 +58,12 @@
 }
 
 @media screen and (max-width: 1100px) {
-  .login-block__form--field-label, .login-block__form--field-label--name-section-label, .authorization-block__form--field-label, .authorization-block__form--field-label--name-section-label {
+  .login-block__form--field-label, .login-block__form--field-label--name-section-label, .authorization-block__form--field-label, .authorization-block__form--field-label--name-section-label, .shedule-block__form--field-label, .shedule-block__form--field-label--name-section-label {
     font-size: 14px;
   }
 }
 
-.login-block__form--field input:not([type='checkbox']), .login-block__form--field-label--name-section input:not([type='checkbox']), .authorization-block__form--field input:not([type='checkbox']), .authorization-block__form--field-label--name-section input:not([type='checkbox']) {
+.login-block__form--field input:not([type='checkbox']), .login-block__form--field-label--name-section input:not([type='checkbox']), .authorization-block__form--field input:not([type='checkbox']), .authorization-block__form--field-label--name-section input:not([type='checkbox']), .shedule-block__form--field input:not([type='checkbox']), .shedule-block__form--field-label--name-section input:not([type='checkbox']) {
   min-width: 320px;
   height: 48px;
   border: 1px solid #0398fd;
@@ -72,11 +72,11 @@
           box-shadow: inset 0px 0px 3.57px 1.43px rgba(0, 0, 0, 0.35);
 }
 
-.login-block__form--field input:not([type='checkbox']):focus, .login-block__form--field-label--name-section input:not([type='checkbox']):focus, .authorization-block__form--field input:not([type='checkbox']):focus, .authorization-block__form--field-label--name-section input:not([type='checkbox']):focus {
+.login-block__form--field input:not([type='checkbox']):focus, .login-block__form--field-label--name-section input:not([type='checkbox']):focus, .authorization-block__form--field input:not([type='checkbox']):focus, .authorization-block__form--field-label--name-section input:not([type='checkbox']):focus, .shedule-block__form--field input:not([type='checkbox']):focus, .shedule-block__form--field-label--name-section input:not([type='checkbox']):focus {
   outline: none;
 }
 
-.login-block__form--field-btn-login, .authorization-block__form--field-btn-login {
+.login-block__form--field-btn-login, .authorization-block__form--field-btn-login, .shedule-block__form--field-btn-login {
   padding: 4px 50px;
   background: #0398fd;
   color: #fff;
@@ -88,7 +88,7 @@
   transition: 0.3s all;
 }
 
-.login-block__form--field-btn-login:hover, .authorization-block__form--field-btn-login:hover {
+.login-block__form--field-btn-login:hover, .authorization-block__form--field-btn-login:hover, .shedule-block__form--field-btn-login:hover {
   background: #343A40;
 }
 

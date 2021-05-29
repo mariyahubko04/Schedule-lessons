@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import { LoginForm } from "./LoginPage/LoginForm";
-import { AuthorizationForm } from "./LoginPage/AuthorizationForm";
+import { RegistrationForm } from "./LoginPage/RegistrationForm";
 import { getDates } from "../api/getDates";
 
 export const Login = () => {
@@ -27,7 +27,7 @@ export const Login = () => {
 
                 <div className='login-block__section--line' />
 
-                <AuthorizationForm />
+                <RegistrationForm />
             </div>
         </div>
     );
