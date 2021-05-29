@@ -101,6 +101,10 @@
   .container .slick-prev {
     left: 15px;
   }
+  .login-block__form--field-btn-login,
+  .authorization-block__form--field-btn-login {
+    font-size: 20px;
+  }
 }
 
 @media screen and (max-width: 480px) {
@@ -109,6 +113,11 @@
   }
   .container .slick-slide img {
     height: 270px;
+  }
+  .authorization-block__form--field-label--checked {
+    -ms-grid-columns: 25px 1fr;
+        grid-template-columns: 25px 1fr;
+    margin: 3px 0 10px;
   }
 }
 
