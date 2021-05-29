@@ -121,6 +121,24 @@
   .authorization-block__form--field-btn-login {
     font-size: 20px;
   }
+
+  .authorization-block__form--field-label--checked {
+    margin: 3px 0 10px;
+
+    input {
+      margin-right: 5px;
+    }
+  }
+
+  .footer .footer__nav {
+    display: grid;
+    grid-template-columns: 0.6fr 3px 0.5fr;
+
+    .footer__column {
+      margin-left: 15px;
+      text-align: start;
+    }
+  }
 }
 
 @media screen and (max-width: 480px) {
@@ -134,7 +152,12 @@
 
   .authorization-block__form--field-label--checked {
     grid-template-columns: 25px 1fr;
+    column-gap: 5px;
     margin: 3px 0 10px;
+
+    input {
+      margin-right: 5px;
+    }
   }
 }
 

@@ -105,6 +105,22 @@
   .authorization-block__form--field-btn-login {
     font-size: 20px;
   }
+  .authorization-block__form--field-label--checked {
+    margin: 3px 0 10px;
+  }
+  .authorization-block__form--field-label--checked input {
+    margin-right: 5px;
+  }
+  .footer .footer__nav {
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: 0.6fr 3px 0.5fr;
+        grid-template-columns: 0.6fr 3px 0.5fr;
+  }
+  .footer .footer__nav .footer__column {
+    margin-left: 15px;
+    text-align: start;
+  }
 }
 
 @media screen and (max-width: 480px) {
@@ -117,7 +133,12 @@
   .authorization-block__form--field-label--checked {
     -ms-grid-columns: 25px 1fr;
         grid-template-columns: 25px 1fr;
+    -webkit-column-gap: 5px;
+            column-gap: 5px;
     margin: 3px 0 10px;
+  }
+  .authorization-block__form--field-label--checked input {
+    margin-right: 5px;
   }
 }
 
