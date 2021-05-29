@@ -96,7 +96,7 @@ export const AuthorizationForm = () => {
           className="btn authorization-block__form--field-btn-login"
           type="submit"
         >
-          Увійти
+          Зареєструватися
       </button>
       </form>
     </div>
