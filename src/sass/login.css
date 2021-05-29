@@ -57,6 +57,12 @@
   font-size: 17px;
 }
 
+@media screen and (max-width: 1100px) {
+  .login-block__form--field-label, .login-block__form--field-label--name-section-label, .authorization-block__form--field-label, .authorization-block__form--field-label--name-section-label {
+    font-size: 14px;
+  }
+}
+
 .login-block__form--field input:not([type='checkbox']), .login-block__form--field-label--name-section input:not([type='checkbox']), .authorization-block__form--field input:not([type='checkbox']), .authorization-block__form--field-label--name-section input:not([type='checkbox']) {
   min-width: 320px;
   height: 48px;

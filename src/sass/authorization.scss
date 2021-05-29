@@ -20,6 +20,21 @@
       width: 100%;
       max-width: 300px;
       height: 48px;
+
+      @media screen and (max-width: 1350px) {
+        min-width: 250px;
+        max-width: 250px;
+      }
+
+      @media screen and (max-width: 1250px) {
+        min-width: 200px;
+        max-width: 200px;
+      }
+
+      @media screen and (max-width: 1150px) {
+        min-width: 170px;
+        max-width: 170px;
+      }
     }
   }
 
@@ -31,6 +46,15 @@
     justify-items: flex-start;
     height: 100%;
     white-space: nowrap;
+
+    @media screen and (max-width: 1250px) {
+      grid-template-columns: 25px 1fr;
+      column-gap: 5px;
+    }
+
+    @media screen and (max-width: 950px) {
+      grid-template-columns: 20px 1fr;
+    }
 
     input {
       margin-left: 5px;

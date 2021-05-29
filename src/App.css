@@ -5,6 +5,7 @@
 @import "./sass/slider.css";
 @import "./sass/footer.css";
 @import "./sass/variable.css";
+@import "./sass/mobile-version.css";
 @import url("./sass/fonts/futura/style.css");
 
 body {

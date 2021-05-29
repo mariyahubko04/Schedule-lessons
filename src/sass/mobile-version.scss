@@ -1,0 +1,212 @@
+@media screen and (max-width: 900px) {
+  .login-block h2 {
+    margin-bottom: 30px;
+  }
+
+  .login-block__form--field-btn-login {
+    margin-top: 0;
+  }
+
+  .login-block__section {
+    grid-template-columns: 1fr;
+  }
+
+  .login-block__section--line,
+  .authorization-block__section--line {
+    margin-bottom: 25px;
+    width: 80%;
+    height: 2px;
+    opacity: 0.3;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .header__block--logo-schedule {
+    height: 21px;
+  }
+
+  .header__block--navbar {
+    font-size: 19px;
+  }
+
+  .header__additional-block,
+  .login-block__title {
+    font-size: 20px;
+  }
+
+  .container {
+    height: 400px;
+  }
+
+  .container .slick-arrow {
+    top: 85%;
+  }
+
+  .container .slick-dots {
+    bottom: 35px;
+  }
+
+  .container .slick-slide img {
+    height: 400px;
+  }
+
+  .login-block__form,
+  .authorization-block__form {
+    margin: 0 0 10px;
+  }
+
+  .footer__section {
+    width: 100%;
+    margin: 0;
+  }
+}
+
+@media screen and (max-width: 780px) {
+  .header__block {
+    display: grid !important;
+    grid-template-rows: 1fr 1fr;
+    height: 150px;
+    row-gap: 10px;
+    justify-content: center;
+    margin-bottom: 15px;
+  }
+
+  .header__block--navbar {
+    padding: 0;
+  }
+
+  .header__block--navbar--link {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .container {
+    height: 350px;
+  }
+
+  .container .slick-slide img {
+    height: 350px;
+  }
+}
+
+@media screen and (max-width: 550px) {
+
+  .header__additional-block,
+  .login-block__title {
+    font-size: 18px;
+  }
+
+  .container {
+    height: 300px;
+  }
+
+  .container .slick-slide img {
+    height: 300px;
+  }
+
+  .container .slick-dots {
+    bottom: 20px;
+  }
+
+  .container .slick-next {
+    right: 15px;
+  }
+
+  .container .slick-prev {
+    left: 15px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .container {
+    height: 270px;
+  }
+
+  .container .slick-slide img {
+    height: 270px;
+  }
+}
+
+@media screen and (max-width: 430px) {
+
+  .header__additional-block,
+  .login-block__title {
+    font-size: 16px;
+  }
+
+  .container {
+    height: 250px;
+  }
+
+  .container .slick-slide img {
+    height: 250px;
+  }
+
+  .authorization-block__form--field {
+    grid-template-columns: 1fr;
+
+    input:not([type='checkbox']) {
+      min-width: 320px;
+      max-width: 320px;
+    }
+
+    .authorization-block__form--field-label--checked {
+      grid-template-columns: 25px 1fr;
+      margin: 3px 0 10px;
+    }
+  }
+
+  .login-block__section h2,
+  .authorization-block__section h2 {
+    font-size: 28px;
+    margin-bottom: 15px;
+  }
+
+  .login-block__form--field-label,
+  .login-block__form--field-label--name-section-label,
+  .authorization-block__form--field-label,
+  .authorization-block__form--field-label--name-section-label {
+    font-size: 15px;
+  }
+
+  .login-block__form--field,
+  .login-block__form--field-label--name-section,
+  .authorization-block__form--field,
+  .authorization-block__form--field-label--name-section {
+    margin-bottom: 10px;
+  }
+
+  .footer {
+    height: 400px;
+  }
+
+  .footer .footer__section--block {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    row-gap: 15px;
+  }
+
+  .footer__column {
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 380px) {
+  .header__additional-block,
+  .login-block__title {
+    font-size: 15px;
+  }
+
+  .container {
+    height: 220px;
+  }
+
+  .container .slick-slide img {
+    height: 220px;
+  }
+
+  .container .slick-arrow {
+    top: 80%;
+  }
+}
