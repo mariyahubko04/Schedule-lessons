@@ -3,6 +3,12 @@
   margin: 0 auto 25px;
 }
 
+@media screen and (max-width: 480px) {
+  .shedule-block__select-group {
+    width: 350px;
+  }
+}
+
 .shedule-block__select-group--lable {
   width: 100%;
   font-size: 27px;
@@ -36,6 +42,27 @@ div .shedule-block__section {
   margin-bottom: 75px;
 }
 
+@media screen and (max-width: 1280px) {
+  div .shedule-block__section {
+    -ms-grid-columns: (400px)[2];
+        grid-template-columns: repeat(2, 400px);
+  }
+}
+
+@media screen and (max-width: 880px) {
+  div .shedule-block__section {
+    -ms-grid-columns: 400px;
+        grid-template-columns: 400px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  div .shedule-block__section {
+    -ms-grid-columns: 320px;
+        grid-template-columns: 320px;
+  }
+}
+
 .shedule-block__section--weeks {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -58,6 +85,12 @@ div .shedule-block__section {
   cursor: pointer;
 }
 
+@media screen and (max-width: 480px) {
+  .shedule-block__section--weeks-item {
+    padding: 3px 20px;
+  }
+}
+
 .shedule-block__section--weeks-item.active {
   color: #fff;
   background: red;
@@ -75,6 +108,12 @@ div .shedule-block__section {
   opacity: 0.4;
   min-width: 400px;
   text-align: center;
+}
+
+@media screen and (max-width: 480px) {
+  .shedule-block__section--one-day {
+    min-width: 320px;
+  }
 }
 
 .shedule-block__section--one-day--lesson-block:nth-child(1) .shedule-block__section--one-day--lesson-block--subject-cabinet, .shedule-block__section--one-day--lesson-block:nth-child(8) .shedule-block__section--one-day--lesson-block--subject-cabinet {
@@ -225,6 +264,13 @@ div .shedule-block__section {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  width: 290px;
+}
+
+@media screen and (max-width: 480px) {
+  .shedule-block__section--one-day--lesson-block--subject-name .teacher {
+    width: 210px;
+  }
 }
 
 .shedule-block__section--one-day--lesson-block--subject-name::before {

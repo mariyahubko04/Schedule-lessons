@@ -5,6 +5,10 @@
     width: 450px;
     margin: 0 auto 25px;
 
+    @media screen and (max-width: 480px) {
+      width: 350px;
+    }
+
     &--lable {
       width: 100%;
       font-size: 27px;
@@ -34,6 +38,18 @@
     row-gap: 25px;
     justify-content: center;
     margin-bottom: 75px;
+
+    @media screen and (max-width: 1280px) {
+      grid-template-columns: repeat(2, 400px);
+    }
+
+    @media screen and (max-width: 880px) {
+      grid-template-columns: 400px;
+    }
+
+    @media screen and (max-width: 480px) {
+      grid-template-columns: 320px;
+    }
   }
 
   &__section--weeks {
@@ -49,6 +65,10 @@
       font-weight: 500;
       color: $gray;
       cursor: pointer;
+
+      @media screen and (max-width: 480px) {
+        padding: 3px 20px;
+      }
 
       &.active {
         color: $title-text-color;
@@ -69,6 +89,10 @@
     opacity: 0.4;
     min-width: 400px;
     text-align: center;
+
+    @media screen and (max-width: 480px) {
+      min-width: 320px;
+    }
 
     &--lesson-block {
     &:nth-child(1),
@@ -229,6 +253,11 @@
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
+        width: 290px;
+
+        @media screen and (max-width: 480px) {
+          width: 210px;
+        }  
       }
 
       &::before {
