@@ -29,12 +29,46 @@ export const SheduleBlock = () => {
     const [groups, setGroups] = useState([]);
     const [selectedWeek, setSelectedWeek] = useState(1);
     const [selectedGroup, setSelectedGroup] = useState();
-    const [sheduleByGroup, setSheduleByGroup] = useState([]);
+    const [sheduleByGroup, setSheduleByGroup] = useState({ 1: {}, 2: {} });
+    const date = new Date();
+    // счет начинается с воскресенья, а у проекте с пн, поэтому отнимаем 1 день
+    const currendDayWeek = date.getDay() - 1;
 
     const getSheduleByGroupId = async (groupId) => {
         try {
             const sheduleByGroup = await getSheduleByGroup(groupId);
-            if (sheduleByGroup) setSheduleByGroup(sheduleByGroup);
+            if (sheduleByGroup) {
+                const result = { 1: {}, 2: {} };
+
+                for (let i = 0; i < sheduleByGroup.length; i++) {
+                    const lesson = sheduleByGroup[i];
+                    const {
+                        parity,
+                        week_day,
+                        lesson_number,
+                        subject,
+                        lesson_type,
+                        teacher,
+                        audience,
+                    } = lesson;
+                    const { day_number } = week_day;
+                    const { academ_status, firstname, lastname, middlename } =
+                        teacher;
+                    if (!result[parity][day_number])
+                        result[parity][day_number] = {};
+                    result[parity][day_number][lesson_number] = {
+                        name: subject.name,
+                        lessonType: lesson_type.name,
+                        teacher: {
+                            status: academ_status.name,
+                            fio: `${firstname} ${middlename} ${lastname}`,
+                        },
+                        cabinet: audience.number,
+                    };
+                }
+
+                setSheduleByGroup(result);
+            }
         } catch (err) {
             console.error(err);
         }
@@ -44,17 +78,16 @@ export const SheduleBlock = () => {
         (async () => {
             try {
                 const groups = await getGroups();
-                console.log("groups", groups);
                 if (groups) {
-                    //{ value: 'VG-67', label: 'VG-67' },
-                    setGroups(groups);
+                    setGroups(
+                        groups.map((group) => {
+                            const { id, name, number } = group;
+                            return { value: id, label: `${name}-${number}` };
+                        })
+                    );
                     const defoultGroup = groups[0];
-                    setSelectedGroup({
-                        label: defoultGroup,
-                        value: defoultGroup,
-                    });
-
-                    //await getSheduleByGroupId(defoultGroup);
+                    const { id, name, number } = defoultGroup;
+                    setSelectedGroup({ value: id, label: `${name}-${number}` });
                 }
             } catch (err) {
                 console.error(err);
@@ -64,7 +97,7 @@ export const SheduleBlock = () => {
 
     useEffect(() => {
         // при выборе группы запрашиваем новое расписание
-        if(selectedGroup) getSheduleByGroupId(selectedGroup);
+        if (selectedGroup) getSheduleByGroupId(selectedGroup.value);
     }, [selectedGroup]);
 
     return (
@@ -105,42 +138,61 @@ export const SheduleBlock = () => {
             </div>
 
             <div className="shedule-block__section">
-                {days.map((day, number) => (
-                    <div
-                        key={`1-${number}`}
-                        className={`shedule-block__section--one-day ${
-                            number === 2 ? "active" : ""
-                        }`}
-                    >
-                        <span className="shedule-block__section--one-day--name">
-                            {day}
-                        </span>
+                {days.map((day, number) => {
+                    return (
+                        <div
+                            key={`1-${number}`}
+                            className={`shedule-block__section--one-day ${
+                                number === currendDayWeek ? "active" : ""
+                            }`}
+                        >
+                            <span className="shedule-block__section--one-day--name">
+                                {day}
+                            </span>
 
-                        {lessons.map((lesson, numberLesson) => (
-                            <div
-                                key={`lesson-${number}-${numberLesson}`}
-                                className={`shedule-block__section--one-day--lesson-block ${
-                                    numberLesson > 3 ? "empty" : ""
-                                }`}
-                            >
-                                <div className="shedule-block__section--one-day--lesson-block--time">
-                                    <span>{lesson.timeStart}</span>
-                                    <span>{lesson.timeFinish}</span>
-                                </div>
-                                <div className="shedule-block__section--one-day--lesson-block--subject">
-                                    <div className="shedule-block__section--one-day--lesson-block--subject-name">
-                                        {numberLesson <= 3
-                                            ? "Computing"
-                                            : "Пусто"}
+                            {lessons.map((lesson, numberLesson) => {
+                                const lessonInfo =
+                                    (sheduleByGroup[selectedWeek][number + 1] ||
+                                        {})[numberLesson + 1] || {};
+                                const { name, cabinet, teacher, lessonType } =
+                                    lessonInfo;
+
+                                return (
+                                    <div
+                                        key={`lesson-${number}-${numberLesson}`}
+                                        className={`shedule-block__section--one-day--lesson-block ${
+                                            name ? "" : "empty"
+                                        }`}
+                                    >
+                                        <div className="shedule-block__section--one-day--lesson-block--time">
+                                            <span>{lesson.timeStart}</span>
+                                            <span>{lesson.timeFinish}</span>
+                                        </div>
+                                        <div className="shedule-block__section--one-day--lesson-block--subject">
+                                            <div className="shedule-block__section--one-day--lesson-block--subject-name">
+                                                <p className="subject-name">
+                                                    {name || "Пусто"}
+                                                </p>
+                                                <p className="teacher">
+                                                    {name
+                                                        ? `${teacher.fio} (${teacher.status})`
+                                                        : ""}
+                                                </p>
+                                            </div>
+                                            <div className="shedule-block__section--one-day--lesson-block--subject-cabinet">
+                                                {name
+                                                    ? `${
+                                                          lessonType || ""
+                                                      } / ауд. ${cabinet}`
+                                                    : ""}
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div className="shedule-block__section--one-day--lesson-block--subject-cabinet">
-                                        Building 1, ауд. 564
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                ))}
+                                );
+                            })}
+                        </div>
+                    );
+                })}
             </div>
         </div>
     );
