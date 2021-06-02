@@ -1,0 +1,134 @@
+.profile-page .header__additional-block {
+  margin-bottom: 0;
+}
+
+.profile {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 320px 0.7fr;
+      grid-template-columns: 320px 0.7fr;
+  font-variant-caps: small-caps;
+}
+
+.profile .user-block {
+  padding-top: 20px;
+}
+
+.profile .menu-block {
+  border-right: 2px solid #aaaaaa;
+  display: -ms-grid;
+  display: grid;
+}
+
+.profile .menu-block .user-info {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 90px 1fr;
+      grid-template-columns: 90px 1fr;
+  -webkit-column-gap: 10px;
+          column-gap: 10px;
+  padding: 0 20px 15px;
+}
+
+.profile .menu-block .user-block__title,
+.profile .menu-block .menu-item,
+.profile .menu-block .exit-btn {
+  padding: 0 20px;
+  line-height: 30px;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.profile .menu-block .menu-item,
+.profile .menu-block .exit-btn {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  cursor: pointer;
+  position: relative;
+}
+
+.profile .menu-block .menu-item {
+  -webkit-transition: .3 all;
+  transition: .3 all;
+}
+
+.profile .menu-block .menu-item::after {
+  content: '';
+  display: block;
+  width: 12px;
+  height: 12px;
+  border: 2px solid #aaaaaa;
+  border-left: none;
+  border-bottom: none;
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+  position: absolute;
+  right: 15px;
+}
+
+.profile .menu-block .menu-item.active {
+  background: #0398fd;
+  padding-left: 35px;
+}
+
+.profile .menu-block .menu-item.active::after {
+  border: 2px solid #aaaaaa;
+  border-right: none;
+  border-top: none;
+}
+
+.profile .menu-block .user-block__title {
+  text-align: center;
+  color: white;
+  font-weight: 600;
+  background: #aaaaaa;
+  font-size: 19px;
+  line-height: 2;
+}
+
+.profile .menu-block .menu-item {
+  border-bottom: 1px solid #aaaaaa;
+}
+
+.profile .menu-block .user-name p {
+  margin: 0;
+  font-weight: 600;
+  text-align: center;
+  line-height: 1.3;
+  font-size: 19px;
+}
+
+.profile .menu-block .user-name p.user-name__role {
+  color: #aaaaaa;
+  font-weight: 500;
+  font-size: 15px;
+}
+
+.profile .menu-block .photo-block {
+  height: 90px;
+  width: 90px;
+  opacity: 0.6;
+}
+
+.profile .menu-block .photo-block img {
+  height: 100%;
+  width: 100%;
+}
+
+.profile .exit-btn {
+  background: red;
+  color: white;
+}
+
+.profile .exit-btn img {
+  height: 15px;
+  width: 15px;
+}
+/*# sourceMappingURL=profile.css.map */

@@ -7,6 +7,7 @@ import { Footer } from './сomponents/Footer.jsx';
 import { HomePage } from './сomponents/HomePage.jsx';
 import { NotFoundPage } from './сomponents/NotFoundPage.jsx';
 import { Header } from './сomponents/Header.jsx';
+import { ProfilePage } from './сomponents/LoginPage/ProfilePage/ProfilePage';
 
 class App extends Component {
   render() {
@@ -17,6 +18,7 @@ class App extends Component {
         <Switch>
           <Route path="/" exact component={HomePage} />
           <Route path="/login" component={Login} />
+          <Route path="/profile" component={ProfilePage} />
 
           <Route component={NotFoundPage} />
         </Switch>

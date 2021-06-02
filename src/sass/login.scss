@@ -82,15 +82,32 @@
 }
 
 .login-block {
+  &__info {
+    position: relative;
+  }
+
   h2 {
     margin-bottom: 50px;
   }
 
   &__form {
     grid-gap: 5px;
+    position: relative;
   }
 
   &__form--field-btn-login {
     margin-top: 121px;
   }
+
+  .error-text {
+    color: red;
+  }
+}
+
+.show {
+  opacity: 1;
+}
+
+.hidden {
+  opacity: 0;
 }

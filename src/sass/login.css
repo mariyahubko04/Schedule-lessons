@@ -92,15 +92,32 @@
   background: #343A40;
 }
 
+.login-block__info {
+  position: relative;
+}
+
 .login-block h2 {
   margin-bottom: 50px;
 }
 
 .login-block__form {
   grid-gap: 5px;
+  position: relative;
 }
 
 .login-block__form--field-btn-login {
   margin-top: 121px;
+}
+
+.login-block .error-text {
+  color: red;
+}
+
+.show {
+  opacity: 1;
+}
+
+.hidden {
+  opacity: 0;
 }
 /*# sourceMappingURL=login.css.map */

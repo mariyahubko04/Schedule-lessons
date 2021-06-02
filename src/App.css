@@ -6,6 +6,7 @@
 @import "./sass/shedule.css";
 @import "./sass/footer.css";
 @import "./sass/variable.css";
+@import "./sass/profile.css";
 @import "./sass/mobile-version.css";
 @import url("./sass/fonts/futura/style.css");
 
@@ -16,4 +17,10 @@ body {
 .flex-center {
   display: flex;
   align-items: center;
+}
+
+span.css-1n5ab60 {
+  position: absolute;
+  top: calc(50% - 30px);
+  right: calc(50% - 30px);
 }
