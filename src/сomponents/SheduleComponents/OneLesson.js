@@ -1,10 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Select from "react-select";
-import { useState } from "react/cjs/react.development";
 
 export const OneLesson = ({ lesson, lessonInfo, isEdit, subjectNames, cabinets, teachers, lessonTypes }) => {
     const emptyValue = { value: null, label: "Пусто" };
-    const { name, cabinet, teacher, lessonType } = lessonInfo || {};
+    const { name, cabinet, teacher, lessonType } = lessonInfo || { name: '', cabinet: '', teacher: '', lessonType: '' };
     const [selectedName, setName] = useState(emptyValue);
     const [selectedCabinet, setCabinet] = useState(emptyValue);
     const [selectedTeacherFio, setTeacherFio] = useState(emptyValue);
@@ -12,7 +11,7 @@ export const OneLesson = ({ lesson, lessonInfo, isEdit, subjectNames, cabinets, 
     const [selectedLessonType, setLessonType] = useState(emptyValue);
 
     const setLessonInfo = () => {
-        setName({ value: name || null, label: name || "Пусто" });
+        name && setName({ value: name, label: name });
         teacher && setTeacherFio({ value: teacher.fio, label: teacher.fio });
         teacher && setTeacherStatus({ value: teacher.status, label: teacher.status });
         cabinet && setCabinet({ value: cabinet, label: cabinet });

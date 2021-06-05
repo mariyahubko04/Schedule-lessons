@@ -1,6 +1,5 @@
-import React from "react";
-import PhoneInput from 'react-phone-number-input/input';
-import { useState } from "react/cjs/react.development";
+import React, { useState } from "react";
+import PhoneInput from 'react-phone-number-input/input'; 
 
 export const RegistrationForm = (groups) => {
   const [firstname, setFirstname] = useState('');
