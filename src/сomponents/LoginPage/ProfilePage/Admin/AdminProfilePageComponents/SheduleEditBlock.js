@@ -1,0 +1,198 @@
+import React, { useState, useEffect } from 'react';
+
+import { OneDayShedule } from '../../../../SheduleComponents/OneDayShedule';
+import { SelectGroup } from '../../../../SheduleComponents/SelectGroup';
+import { WeeksBlock } from '../../../../SheduleComponents/WeeksBlock';
+
+import { getSheduleByGroup } from '../../../../../api/getDates';
+
+const days = {
+  1: { label: "Понеділок", abbreviation: "Пн", value: 1 },
+  2: { label: "Вівторок", abbreviation: "Вт", value: 2 },
+  3: { label: "Середа", abbreviation: "Ср", value: 3 },
+  4: { label: "Четвер", abbreviation: "Чт", value: 4 },
+  5: { label: "П'ятниця", abbreviation: "Пт", value: 5 },
+  6: { label: "Субота", abbreviation: "Сб", value: 6 },
+};
+
+export const SheduleEditBlock = ({ groups, prevSubjects, prevCabinets, prevTeachers, prevLessonTypes }) => {
+  const [selectedWeek, setSelectedWeek] = useState(1);
+  const [selectedDay, setSelectedDay] = useState(1);
+  const [selectedGroup, setSelectedGroup] = useState(groups[0]);
+  const [sheduleByGroup, setSheduleByGroup] = useState({ 1: {}, 2: {} });
+  const [subjectNames, setSubjectNames] = useState([]);
+  const [cabinets, setCabinets] = useState([]);
+  const [teachers, setTeachers] = useState([]);
+  const [lessonTypes, setLessonTypes] = useState([]);
+  const [isEdit, setIsEdit] = useState(false);
+
+  const getSheduleByGroupId = async (groupId) => {
+    try {
+      const sheduleByGroup = await getSheduleByGroup(groupId);
+      if (sheduleByGroup) {
+        const result = { 1: {}, 2: {} };
+
+        for (let i = 0; i < sheduleByGroup.length; i++) {
+          const lesson = sheduleByGroup[i];
+          const {
+            parity,
+            week_day,
+            lesson_number,
+            subject,
+            lesson_type,
+            teacher,
+            audience,
+          } = lesson;
+          const { day_number } = week_day;
+          const { academ_status, firstname, lastname, middlename } =
+            teacher;
+          if (!result[parity][day_number])
+            result[parity][day_number] = {};
+          result[parity][day_number][lesson_number] = {
+            name: subject.name,
+            lessonType: lesson_type.name,
+            teacher: {
+              status: academ_status.name,
+              fio: `${firstname} ${middlename} ${lastname}`,
+            },
+            cabinet: audience.number,
+          };
+        }
+
+        setSheduleByGroup(result);
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const getSubjectsOptions = (subjects) => {
+    const { data } = subjects;
+    return data.map(item => ({ value: item.id, label: item.name }));
+  };
+
+  const getCabinetsOptions = (subjects) => {
+    const { data } = subjects;
+    return data.map(item => ({ value: item.id, label: item.number }));
+  };
+
+  const getTeachersOptions = (subjects) => {
+    const { data } = subjects;
+    return data.map(item => ({ value: item.id, label: `${item.firstname} ${item.middlename} ${item.lastname} (${item.academ_status.name})` }));
+  };
+
+  const getAllData = async () => {
+    try {
+      setSubjectNames(getSubjectsOptions(prevSubjects));
+      setCabinets(getCabinetsOptions(prevCabinets));
+      setTeachers(getTeachersOptions(prevTeachers));
+      setLessonTypes(getSubjectsOptions(prevLessonTypes));
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const cancelChanged = () => setIsEdit(false);
+
+  const saveLesson = () => {};
+
+  const handleNexDay = (isNext) => {
+    let newSelectedDay = selectedDay;
+
+    if (isNext) {
+      newSelectedDay = selectedDay === Object.keys(days).length ? 1 : selectedDay + 1;
+    } else {
+      newSelectedDay = selectedDay === 1 ? Object.keys(days).length : selectedDay - 1;
+    }
+
+    setSelectedDay(newSelectedDay);
+  };
+
+  useEffect(() => {
+    const defoultGroup = groups[0];
+
+    setSelectedGroup(defoultGroup);
+    getAllData();
+  }, []);
+
+  useEffect(() => {
+    // при выборе группы запрашиваем новое расписание
+    if (selectedGroup) getSheduleByGroupId(selectedGroup.value);
+  }, [selectedGroup]);
+
+  return (
+      <div className={`shedule-edit ${isEdit ? 'edit-mode': ''}`}>
+          <SelectGroup
+              isEdit={isEdit}
+              groups={groups}
+              selectedGroup={selectedGroup}
+              setSelectedGroup={setSelectedGroup}
+          />
+
+          <div className="setting-block">
+              <WeeksBlock
+                  isEdit={isEdit}
+                  selectedWeek={selectedWeek}
+                  setSelectedWeek={setSelectedWeek}
+              />
+
+              <div className={`day-week ${ isEdit ? 'disabled' : ''}`}>
+                  {Object.keys(days).map((day) => (
+                      <span
+                        onClick={() => !isEdit ? setSelectedDay(day) : {}}
+                        className={day == selectedDay ? "active" : ""}
+                      >
+                          {days[day].abbreviation}
+                      </span>
+                  ))}
+              </div>
+
+              <div className="btn-block">
+                  <button
+                    className="red"
+                    disabled={!isEdit}
+                    onClick={cancelChanged}
+                  >
+                    <img src="images/cancel.png" alt="cancel" />
+                  </button>
+
+                  <button
+                    className="blue"
+                    onClick={saveLesson}
+                  >
+                    <img src="images/save.png" alt="save" />
+                  </button>
+
+                  <button
+                    className="blue"
+                    disabled={isEdit}
+                    onClick={() => setIsEdit(isEdit => !isEdit)}
+                  >
+                    <img src="images/edit.png" alt="edit" />
+                  </button>
+              </div>
+          </div>
+
+          {!isEdit && <button
+            className="prev-btn"
+            onClick={() => handleNexDay(false)}
+          />}
+
+          <OneDayShedule
+              isActive={true}
+              isEdit={isEdit}
+              day={days[selectedDay].label}
+              sheduleByDay={sheduleByGroup[selectedWeek][selectedDay]}
+              subjectNames={subjectNames}
+              cabinets={cabinets}
+              teachers={teachers}
+              lessonTypes={lessonTypes}
+          />
+
+          {!isEdit && <button
+            className="next-btn"
+            onClick={() => handleNexDay(true)}
+          />}
+      </div>
+  );
+};

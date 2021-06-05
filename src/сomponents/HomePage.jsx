@@ -3,7 +3,7 @@ import React from "react";
 import { MainPageSlider } from "./MainPageSlider";
 import { SheduleBlock } from "./SheduleBlock";
 
-export const HomePage = () => {
+export const HomePage = ({groups}) => {
     return (
         <>
             <div className="header__additional-block">
@@ -12,7 +12,7 @@ export const HomePage = () => {
 
             <MainPageSlider />
 
-            <SheduleBlock />
+            {groups && <SheduleBlock groups={groups}/>}
         </>
     );
 };

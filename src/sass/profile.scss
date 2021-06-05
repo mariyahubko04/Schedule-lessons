@@ -8,8 +8,14 @@
 
 .profile {
   display: grid;
-  grid-template-columns: 320px 0.7fr;
+  justify-content: space-between;
+  grid-template-columns: 320px 1fr;
   font-variant-caps: small-caps;
+  min-height: 80vh;
+
+  .shedule-block__section--one-day--lesson-block--subject-name {
+    height: 75px;
+  }
 
   .user-block {
     padding-top: 20px;
@@ -18,6 +24,7 @@
   .menu-block {
     border-right: 2px solid $gray;
     display: grid;
+    align-content: space-between;
 
     .user-info {
       display: grid;
@@ -30,7 +37,7 @@
     .menu-item,
     .exit-btn {
       padding: 0 20px;
-      line-height: 30px;
+      line-height: 40px;
       font-weight: 600;
       font-size: 18px;
     }
@@ -42,10 +49,20 @@
       justify-content: space-between;
       cursor: pointer;
       position: relative;
+      height: 40px;
+      transition: .3s all;
     }
 
     .menu-item {
       transition: .3 all;
+
+      &:hover {
+        color: $additional-color;
+        &::after {
+          border-color: $additional-color;
+        }
+      }
+
       &::after {
         content: '';
         display: block;
@@ -61,10 +78,11 @@
 
       &.active {
         background: $additional-color;
+        color: $title-text-color;
         padding-left: 35px;
 
         &::after {
-        border: 2px solid $gray;
+        border: 2px solid $title-text-color;
         border-right: none;
         border-top: none;
         }
@@ -90,7 +108,7 @@
         font-weight: 600;
         text-align: center;
         line-height: 1.3;
-        font-size: 19px;
+        font-size: 21px;
       }
 
       p.user-name__role {
@@ -101,8 +119,8 @@
     }
 
     .photo-block {
-      height: 90px;
-      width: 90px;
+      height: 95px;
+      width: 95px;
       opacity: 0.6;
 
       img {
@@ -120,5 +138,200 @@
       height: 15px;
       width: 15px;
     }
+  }
+
+  .shedule-block__section--one-day--lesson-block--subject-name {
+    padding-top: 8px;
+  }
+}
+
+// страница редактирования расписания
+.shedule-edit {
+  margin: 20px 10px 60px;
+  position: relative;
+  .shedule-block__select-group .css-yk16xz-control,
+  .shedule-block__select-group .css-1pahdxg-control {
+    box-shadow: inset 0px 0px 2.57px 1.47px $additional-color;
+    cursor: pointer;
+  }
+  .shedule-block__section--one-day.active {
+    width: 500px;
+    padding-top: 20px;
+    margin: auto;
+  }
+  .setting-block {
+    display: grid;
+    grid-template-columns: 315px 270px 135px;
+    column-gap: 30px;
+    align-items: center;
+    justify-content: center;
+  }
+  .shedule-block__section--weeks {
+    height: 40px;
+    &-item {
+      padding: 1px 30px;
+      font-size: 24px;
+    }
+  }
+  .day-week {
+    display: flex;
+    span {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 40px;
+      width: 40px;
+      color: $gray;
+      border: 1px solid $gray;
+      box-shadow: inset 0px 0px 2.57px 1.43px $additional-color;
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-right: 5px;
+      cursor: pointer;
+    }
+    span.active {
+      background: $additional-color;
+      color: $title-text-color;
+    }
+  }
+  .btn-block {
+    display: flex;
+
+    button {
+      height: 40px;
+      width: 40px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 5px;
+
+      &:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+      
+      img {
+        height: 20px;
+        width: 20px;
+      }
+    }
+    .red{
+      background: red;
+    }
+    .blue {
+      background: $additional-color;
+    }
+  }
+  .prev-btn,
+  .next-btn {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 70px;
+    width: 70px;
+    border: 1px solid transparent;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    background: black;
+    opacity: 0.6;
+    cursor: pointer;
+    transition: all .3s;
+    z-index: 3;
+  }
+
+  .next-btn {
+    right: 20%;
+
+    &:before {
+      content: url("images/right.png");
+      position: absolute;
+      top: calc(50% - 16px);
+    }
+  }
+
+  .prev-btn {
+    left: 20%;
+
+    &:before {
+      content: url("images/left.png");
+      position: absolute;
+      top: calc(50% - 16px);
+    }
+  }
+
+  .next-btn:hover, .prev-btn:hover {
+    background: #111;
+    opacity: 0.4;
+  }
+
+  .next-btn:focus, .prev-btn:focus {
+    border: none;
+    box-shadow: none;
+    outline: none;
+  }
+
+  .shedule-block__section--one-day--lesson-block--subject-name .subject-name {
+    width: 100%;
+  }
+}
+
+.shedule-edit.edit-mode {
+  .shedule-block__section--one-day .css-yk16xz-control,
+  .shedule-block__section--one-day .css-1pahdxg-control {
+    box-shadow: none;
+    border: none;
+    height: 35px;
+    min-height: 35px;
+  }
+
+  .shedule-block__section--one-day--lesson-block--subject-name {
+    padding: 0;
+  }
+
+  .css-1okebmr-indicatorSeparator {
+    opacity: 0;
+  }
+
+  .subject-name {
+    max-height: 35px;
+    overflow: visible;
+    cursor: pointer;
+  }
+
+  .teacher {
+    width: 100%;
+    margin-top: 12px;
+    overflow: visible;
+    cursor: pointer;
+    border-top: 1px solid $gray;
+    opacity: 1;
+  }
+
+  .shedule-block__section--one-day--lesson-block--subject-cabinet {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .cabinet {
+    position: relative;
+    &::before {
+      content: '';
+      display: block;
+      width: 2px;
+      height: 16px;
+      background: #fff;
+      position: absolute;
+      top: calc(50% - 8px);
+      left: 0;
+    }
+  }
+
+  .css-1fhf3k1-control {
+    border: 2px solid transparent !important;
   }
 }

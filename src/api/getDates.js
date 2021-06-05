@@ -20,7 +20,41 @@ export const getSheduleByGroup = async (idGroup) => {
 
 export const setLogin = async (param) => {
   const response = await axios.post(`/login`, param);
-  console.log('response', response);
+  const { data } = response;
+
+  return data;
+};
+
+export const getAllSubjects = async () => {
+  const response = await axios.get(`/subject`);
+  const { data } = response;
+
+  return data;
+};
+
+export const getAllTeachers = async () => {
+  const response = await axios.get(`users/teachers`);
+  const { data } = response;
+
+  return data;
+};
+
+export const getAllCabinets = async () => {
+  const response = await axios.get(`/audience`);
+  const { data } = response;
+
+  return data;
+};
+
+export const getAllAcademicStatus = async () => {
+  const response = await axios.get(`/academicStatus`);
+  const { data } = response;
+
+  return data;
+};
+
+export const getAllLessonTypes = async () => {
+  const response = await axios.get(`/lessonType`);
   const { data } = response;
 
   return data;

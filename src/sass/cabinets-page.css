@@ -1,0 +1,80 @@
+.cabinets, .subjects, .teachers {
+  margin-top: 25px;
+  text-align: center;
+}
+
+.cabinets h1, .subjects h1, .teachers h1 {
+  font-size: 25px;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.cabinets-save-btn, .subjects-save-btn, .teachers-save-btn {
+  height: 40px;
+  width: 150px;
+  background: #0398fd;
+  color: #fff;
+  border: none;
+  font-size: 20px;
+  margin: auto;
+}
+
+.cabinets-page {
+  margin: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: baseline;
+      -ms-flex-align: baseline;
+          align-items: baseline;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.cabinets-page .one-floor {
+  padding: 5px 0;
+  display: -ms-grid;
+  display: grid;
+  -ms-flex-line-pack: start;
+      align-content: start;
+  justify-items: center;
+  row-gap: 3px;
+  width: 120px;
+  height: 350px;
+  overflow: auto;
+  border: 2px solid #aaaaaa;
+  margin-right: 20px;
+  -webkit-box-shadow: inset 0px 0px 2.57px 1.43px #0398fd;
+          box-shadow: inset 0px 0px 2.57px 1.43px #0398fd;
+  /* Handle */
+}
+
+.cabinets-page .one-floor::-webkit-scrollbar {
+  width: 15px;
+}
+
+.cabinets-page .one-floor::-webkit-scrollbar-thumb {
+  background: #0398fd;
+}
+
+.cabinets-page label {
+  margin: 0;
+  width: 90%;
+  opacity: 0.8;
+}
+
+.cabinets-page label input {
+  border: none;
+  font-size: 25px;
+  font-weight: 600;
+  text-align: center;
+  width: 100%;
+  padding-left: 20px;
+}
+
+.cabinets-page .error input {
+  color: red;
+}
+/*# sourceMappingURL=cabinets-page.css.map */

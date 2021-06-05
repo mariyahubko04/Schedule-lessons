@@ -1,5 +1,7 @@
 import React from "react";
 
+import { OneLesson } from './OneLesson';
+
 const lessons = [
     { number: 1, timeStart: "8:30", timeFinish: "9:50" },
     { number: 2, timeStart: "10:00", timeFinish: "11:20" },
@@ -11,31 +13,26 @@ const lessons = [
     { number: 8, timeStart: "19:10", timeFinish: "20:30" },
 ];
 
-export const SheduleBlock = (days, currendDayWeek) => {
+export const OneDayShedule = ({day, isActive, sheduleByDay, isEdit, subjectNames, cabinets, teachers, lessonTypes}) => {
     return (
-        <div className="shedule-block__section">
-            {days.map((day, number) => {
-                return (
-                    <div
-                        key={`1-${number}`}
-                        className={`shedule-block__section--one-day ${
-                            number === currendDayWeek ? "active" : ""
-                        }`}
-                    >
-                        <span className="shedule-block__section--one-day--name">
-                            {day}
-                        </span>
+        <div
+            className={`shedule-block__section--one-day ${isActive ? "active" : ""}`}
+        >
+            <span className="shedule-block__section--one-day--name">
+                {day}
+            </span>
 
-                        {lessons.map((lesson, numberLesson) => (
-                            <OneLesson
-                                lesson={lesson}
-                                numberLesson={numberLesson}
-                                sheduleByGroup={sheduleByGroup}
-                            />
-                        ))}
-                    </div>
-                );
-            })}
+            {lessons.map((lesson, numberLesson) => (
+                <OneLesson
+                    isEdit={isEdit}
+                    lesson={lesson}
+                    lessonInfo={(sheduleByDay || {})[numberLesson + 1]}
+                    subjectNames={subjectNames}
+                    cabinets={cabinets}
+                    teachers={teachers}
+                    lessonTypes={lessonTypes}
+                />
+            ))}
         </div>
     );
 };

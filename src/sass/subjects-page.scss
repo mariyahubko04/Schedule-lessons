@@ -1,0 +1,23 @@
+@import '../sass/variable.scss';
+
+.subjects-block {
+  margin: 20px 50px;
+}
+
+.subjects-block__item {
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  justify-items: center;
+  grid-template-columns: 600px 30px 30px;
+  column-gap: 10px;
+
+  input:not([type = 'checkbox']) {
+    width: 650px;
+    box-shadow: inset 0px 0px -2.57px 1.43px $additional-color;
+
+    &:disabled {
+      background: #fff;
+    }
+  }
+}

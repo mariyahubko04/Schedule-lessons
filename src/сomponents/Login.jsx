@@ -3,7 +3,7 @@ import React from "react";
 import { LoginForm } from "./LoginPage/LoginForm";
 import { RegistrationForm } from "./LoginPage/RegistrationForm";
 
-export const Login = () => {
+export const Login = (groups) => {
     return (
         <div className="login-block">
             <div className="login-block__title">Увійти або Зареєструватися</div>
@@ -13,7 +13,7 @@ export const Login = () => {
 
                 <div className='login-block__section--line' />
 
-                <RegistrationForm />
+                <RegistrationForm groups={groups}/>
             </div>
         </div>
     );

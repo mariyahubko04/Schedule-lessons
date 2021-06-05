@@ -1,0 +1,18 @@
+.user-page {
+  height: 100%;
+  text-align: center;
+  margin: 20px auto;
+
+  h2 {
+    font-weight: 600;
+  }
+
+  .authorization-block__form--field {
+    grid-template-columns: repeat(2, 300px);
+    margin-top: 3px;
+
+    input {
+      width: 300px;
+    }
+  }
+}

@@ -1,7 +1,18 @@
 import React from "react";
 import PhoneInput from 'react-phone-number-input/input';
+import { useState } from "react/cjs/react.development";
 
-export const RegistrationForm = () => {
+export const RegistrationForm = (groups) => {
+  const [firstname, setFirstname] = useState('');
+  const [lastname, setLastname] = useState('');
+  const [middlename, setMiddlename] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [passwordConfitmation, setPasswordConfitmation] = useState('');
+  const [isTeacher, setIsTeacher] = useState('');
+  const [academStatusId, setAcademStatusId] = useState('');
+  const [groupId, setGroupId] = useState('');
+
   return (
     <div>
       <h2>Зареєструватися</h2>

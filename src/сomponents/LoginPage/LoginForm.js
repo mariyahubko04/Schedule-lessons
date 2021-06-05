@@ -18,17 +18,12 @@ export const LoginForm = () => {
       setIsProgress(true);
       const isLoginSucces = await setLogin({ email, password });
 
-      const { error, data } = isLoginSucces;
-
-      if (error) {
-        setIsError(true);
-        return;
-      }
-
+      const { data } = isLoginSucces;
       const { firstname, lastname, middlename, api_token, role } = data;
       sessionStorage.setItem("user", JSON.stringify({ firstname, lastname, middlename, token: api_token, role: role.name }));
       history.push('/profile');
     } catch (err) {
+      setIsError(true);
       console.error(err);
     } finally {
       setIsProgress(false);

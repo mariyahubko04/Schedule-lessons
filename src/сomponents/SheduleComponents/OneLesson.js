@@ -1,32 +1,128 @@
-import React from "react";
+import React, { useEffect } from "react";
+import Select from "react-select";
+import { useState } from "react/cjs/react.development";
 
-export const OneLesson = (lesson, numberLesson, sheduleByGroup ) => {
-  const lessonInfo =
-  (sheduleByGroup[selectedWeek][number + 1] ||
-    {})[numberLesson + 1] || {};
-const { name, cabinet, teacher, lessonType } =
-  lessonInfo;
+export const OneLesson = ({ lesson, lessonInfo, isEdit, subjectNames, cabinets, teachers, lessonTypes }) => {
+    const emptyValue = { value: null, label: "Пусто" };
+    const { name, cabinet, teacher, lessonType } = lessonInfo || {};
+    const [selectedName, setName] = useState(emptyValue);
+    const [selectedCabinet, setCabinet] = useState(emptyValue);
+    const [selectedTeacherFio, setTeacherFio] = useState(emptyValue);
+    const [selectedTeacherStatus, setTeacherStatus] = useState(emptyValue);
+    const [selectedLessonType, setLessonType] = useState(emptyValue);
+
+    const setLessonInfo = () => {
+        setName({ value: name || null, label: name || "Пусто" });
+        teacher && setTeacherFio({ value: teacher.fio, label: teacher.fio });
+        teacher && setTeacherStatus({ value: teacher.status, label: teacher.status });
+        cabinet && setCabinet({ value: cabinet, label: cabinet });
+        lessonType && setLessonType({ value: lessonType, label: lessonType });
+    };
+
+    useEffect(() => setLessonInfo(), [lessonInfo]);
+
+    useEffect(() => {
+        if (!isEdit) setLessonInfo();
+    }, [isEdit]);
+
+    const customStyles = (height, background) => ({
+        control: (provided, state) => ({
+            ...provided,
+            background: background || '#fff',
+            border: 'none',
+            minHeight: height,
+            height,
+            boxShadow: state.isFocused ? null : null,
+            cursor: 'pointer'
+        }),
+
+        valueContainer: (provided, state) => ({
+            ...provided,
+            height,
+            padding: '0 13px',
+        }),
+
+        input: (provided, state) => ({
+            ...provided,
+            margin: '0px',
+        }),
+        indicatorSeparator: state => ({
+            display: 'none',
+        }),
+        indicatorsContainer: (provided, state) => ({
+            ...provided,
+            height,
+            transform: 'scale(2)'
+        }),
+        singleValue: (provided, state) => ({
+            ...provided,
+            color: 'inherit'
+        }),
+        option: (base, state) => ({
+            ...base,
+            color: 'black',
+            fontSize: '17px'
+        })
+    });
 
     return (
         <div
-            key={`lesson-${number}-${numberLesson}`}
-            className={`shedule-block__section--one-day--lesson-block ${
-                name ? "" : "empty"
-            }`}
+            className={`shedule-block__section--one-day--lesson-block ${name ? "" : "empty"}`}
         >
             <div className="shedule-block__section--one-day--lesson-block--time">
                 <span>{lesson.timeStart}</span>
                 <span>{lesson.timeFinish}</span>
             </div>
+
             <div className="shedule-block__section--one-day--lesson-block--subject">
                 <div className="shedule-block__section--one-day--lesson-block--subject-name">
-                    <p className="subject-name">{name || "Пусто"}</p>
-                    <p className="teacher">
-                        {name ? `${teacher.fio} (${teacher.status})` : ""}
-                    </p>
+                    {isEdit ? <Select
+                        value={selectedName}
+                        onChange={setName}
+                        options={subjectNames}
+                        id={"group"}
+                        className="shedule-block__select-group subject-name"
+                        isDisabled={!isEdit}
+                        styles={customStyles('35px')}
+                    /> : <p className="subject-name">{selectedName.label}</p>}
+
+                    {isEdit ? (
+                        <>
+                            <Select
+                                value={selectedTeacherFio}
+                                onChange={setTeacherFio}
+                                options={teachers}
+                                id={"teacher"}
+                                className="teacher"
+                                styles={customStyles('24px')}
+                            />
+                        </>
+                    ) : name && <p className="teacher">
+                        {`${selectedTeacherFio.label}(${selectedTeacherStatus.label})`}
+                    </p>}
                 </div>
+
                 <div className="shedule-block__section--one-day--lesson-block--subject-cabinet">
-                    {name ? `${lessonType || ""} / ауд. ${cabinet}` : ""}
+                    {isEdit ? (
+                        <>
+                            <Select
+                                value={selectedLessonType}
+                                onChange={setLessonType}
+                                options={lessonTypes}
+                                id={"lessonType"}
+                                className="lessonType"
+                                styles={customStyles('25px', 'transparent')}
+                            />
+                            <Select
+                                value={selectedCabinet}
+                                onChange={setCabinet}
+                                options={cabinets}
+                                id={"cabinet"}
+                                className="cabinet"
+                                styles={customStyles('25px', 'transparent')}
+                            />
+                        </>
+                    ): name && `${lessonType || ""} / ауд. ${cabinet}`}
                 </div>
             </div>
         </div>
