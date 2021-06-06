@@ -17,7 +17,7 @@ export const Header = ({ isLogin, setLoginStatus }) => {
 
 return <header className='header'>
   <div className='header__block flex-center'>
-    <div className='header__block--logo flex-center'>
+    <div className='header__block--logo flex-center' onClick={() => { history.push('/') }}>
       <img
         className='header__block--logo-icon'
         src='images/icon.png'
