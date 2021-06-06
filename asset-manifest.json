@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/Schedule-lessons/static/css/main.37995ae2.chunk.css",
+    "main.css": "/Schedule-lessons/static/css/main.48d5251b.chunk.css",
     "main.js": "/Schedule-lessons/static/js/main.c18d4450.chunk.js",
     "main.js.map": "/Schedule-lessons/static/js/main.c18d4450.chunk.js.map",
     "runtime~main.js": "/Schedule-lessons/static/js/runtime~main.18c0cfe2.js",
@@ -9,10 +9,10 @@
     "static/js/2.386832a1.chunk.js": "/Schedule-lessons/static/js/2.386832a1.chunk.js",
     "static/js/2.386832a1.chunk.js.map": "/Schedule-lessons/static/js/2.386832a1.chunk.js.map",
     "index.html": "/Schedule-lessons/index.html",
-    "precache-manifest.7967515fc478ef47cf626639d1179242.js": "/Schedule-lessons/precache-manifest.7967515fc478ef47cf626639d1179242.js",
+    "precache-manifest.4a037f560c31f500e5fcd60ace2a5d78.js": "/Schedule-lessons/precache-manifest.4a037f560c31f500e5fcd60ace2a5d78.js",
     "service-worker.js": "/Schedule-lessons/service-worker.js",
     "static/css/2.ab2304d9.chunk.css.map": "/Schedule-lessons/static/css/2.ab2304d9.chunk.css.map",
-    "static/css/main.37995ae2.chunk.css.map": "/Schedule-lessons/static/css/main.37995ae2.chunk.css.map",
+    "static/css/main.48d5251b.chunk.css.map": "/Schedule-lessons/static/css/main.48d5251b.chunk.css.map",
     "static/media/App.css": "/Schedule-lessons/static/media/FuturaPT-Medium.995c64e1.woff",
     "static/media/slick-theme.css": "/Schedule-lessons/static/media/slick.f97e3bbf.svg"
   }
