@@ -21,6 +21,10 @@
   cursor: pointer;
 }
 
+.teachers h1 {
+  margin-bottom: 10px;
+}
+
 .cabinets-page {
   margin: 20px;
   display: -webkit-box;
