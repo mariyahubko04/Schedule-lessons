@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import PhoneInput from 'react-phone-number-input/input';
 
 export const UserInfo = () => {
-    const [firstname, setFirstname] = useState("");
-    const [lastname, setLastname] = useState("");
-    const [middlename, setMiddlename] = useState("");
+    const user = sessionStorage.getItem('user');
+    const userInfo= JSON.parse(user);
+    const [firstname, setFirstname] = useState(userInfo.firstname);
+    const [lastname, setLastname] = useState(userInfo.lastname);
+    const [middlename, setMiddlename] = useState(userInfo.middlename);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [passwordConfitmation, setPasswordConfitmation] = useState("");
@@ -25,6 +27,8 @@ export const UserInfo = () => {
                             maxLength={50}
                             required
                             placeholder="Прізвище"
+                            onChange={e => setFirstname(e.target.value)}
+                            value={firstname}
                         />
 
                         <input
@@ -32,6 +36,8 @@ export const UserInfo = () => {
                             maxLength={50}
                             required
                             placeholder="Ім'я"
+                            onChange={e => setMiddlename(e.target.value)}
+                            value={middlename}
                         />
 
                         <input
@@ -39,6 +45,8 @@ export const UserInfo = () => {
                             maxLength={50}
                             required
                             placeholder="По батькові"
+                            onChange={e => setLastname(e.target.value)}
+                            value={lastname}
                         />
                     </div>
                 </label>
