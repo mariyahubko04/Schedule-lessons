@@ -66,7 +66,7 @@ export const RegistrationForm = ({ groups }) => {
         setAcademicStatus(academicStatusOptions);
         academStatusId(academicStatusOptions[0]);
       } catch (err) {
-        setError(JSON.stringify(err));
+        if(err) setError(JSON.stringify(err));
         console.log(err);
       }
     })();
@@ -232,7 +232,7 @@ export const RegistrationForm = ({ groups }) => {
           }
         </div>
 
-        <div className='error'>
+        <div className='error-text'>
           {error}
         </div>
 
