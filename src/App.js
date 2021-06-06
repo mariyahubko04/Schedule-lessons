@@ -54,7 +54,7 @@ class App extends Component {
           </Route>
 
           <Route path="/profile">
-            <ProfilePage groups={groups} />
+            <ProfilePage groups={groups} isLogin={isLogin}/>
           </Route>
 
           <Route component={NotFoundPage} />

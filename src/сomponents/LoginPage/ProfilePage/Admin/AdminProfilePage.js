@@ -45,7 +45,7 @@ export const AdminProfilePage = ({ groups }) => {
         }
     };
 
-    useEffect(() => getAllData(), []);
+    useEffect(() => { getAllData() }, []);
 
     return (
         <div className="profile">

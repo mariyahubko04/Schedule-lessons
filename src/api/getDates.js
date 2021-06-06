@@ -25,6 +25,13 @@ export const setLogin = async (param) => {
   return data;
 };
 
+export const setRegistration = async (param) => {
+  const response = await axios.post(`/register`, param);
+  const { data } = response;
+
+  return data;
+};
+
 export const getAllSubjects = async () => {
   const response = await axios.get(`/subject`);
   const { data } = response;

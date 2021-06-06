@@ -5,6 +5,7 @@ export const ExitBtn = () => {
   const history = useHistory();
 
   const handleExit = () => {
+    sessionStorage.removeItem('user');
     history.push('/');
   };
 

@@ -25,7 +25,6 @@ export const SheduleEditBlock = ({ isAdmin, groups, prevSubjects, prevCabinets, 
   const [teachers, setTeachers] = useState([]);
   const [lessonTypes, setLessonTypes] = useState([]);
   const [isEdit, setIsEdit] = useState(false);
-  console.log('selectedGroup', selectedGroup);
 
   const getSheduleByGroupId = async (groupId) => {
     if (!groupId ) return;
@@ -119,7 +118,6 @@ export const SheduleEditBlock = ({ isAdmin, groups, prevSubjects, prevCabinets, 
   }, []);
 
   useEffect(() => {
-    console.log('selectedGroup', selectedGroup);
     // при выборе группы запрашиваем новое расписание
     if (selectedGroup) getSheduleByGroupId(selectedGroup.value);
   }, [selectedGroup]);

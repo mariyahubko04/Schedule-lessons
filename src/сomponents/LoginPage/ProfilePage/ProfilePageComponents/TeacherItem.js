@@ -4,7 +4,6 @@ import { useState } from 'react';
 import Select from "react-select";
 
 export const TeacherItem = ({ isNewTeacher, prevTeacher, academicStatus, deleteTeacher, setUpdatedTeacher }) => {
-  console.log('academicStatus', academicStatus, 'prevTeacher', prevTeacher);
   const { id, name } = prevTeacher.academ_status || {};
   const [item, setTeacher] = useState(prevTeacher);
   const [status, setStatus] = useState({ value: id, label: name });

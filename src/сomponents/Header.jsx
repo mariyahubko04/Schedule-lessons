@@ -1,7 +1,13 @@
 import React from 'react';
+import { useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 
-export const Header = ({ isLogin, setLoginStatus }) => <header className='header'>
+export const Header = ({ isLogin, setLoginStatus }) => {
+  useEffect(() => {
+    return () => setLoginStatus(false);
+  }, []);
+
+return <header className='header'>
   <div className='header__block flex-center'>
     <div className='header__block--logo flex-center'>
       <img
@@ -25,11 +31,11 @@ export const Header = ({ isLogin, setLoginStatus }) => <header className='header
         </li>
 
         <li className='header__block--navbar--link login-link flex-center'>
-          <NavLink onClick={() => setLoginStatus(false)} className="navlink" to={isLogin ? '/' : "/login"} exact>
+          <NavLink className="navlink" to={isLogin ? '/' : "/login"} exact>
             {isLogin ? 'Вийти' : 'Вхід'}
           </NavLink>
         </li>
       </ul>
     </nav>
   </div>
-</header>;
+</header>};

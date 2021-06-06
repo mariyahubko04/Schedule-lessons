@@ -1,22 +1,119 @@
 import React, { useState } from "react";
-import PhoneInput from 'react-phone-number-input/input'; 
+import { useEffect } from "react";
+import PhoneInput from 'react-phone-number-input/input';
+import Select from "react-select"; 
 
-export const RegistrationForm = (groups) => {
+import { getAllAcademicStatus, setRegistration } from '../../api/getDates';
+
+const customStyles = (height, background) => ({
+  control: (provided, state) => ({
+      ...provided,
+      background: background || '#fff',
+      minHeight: height,
+      height,
+      boxShadow: state.isFocused ? null : null,
+      cursor: 'pointer'
+  }),
+
+  valueContainer: (provided, state) => ({
+      ...provided,
+      height,
+      padding: '0 13px',
+  }),
+
+  input: (provided, state) => ({
+      ...provided,
+      margin: '0px',
+  }),
+  indicatorSeparator: state => ({
+      display: 'none',
+  }),
+  indicatorsContainer: (provided, state) => ({
+      ...provided,
+      height,
+      transform: 'scale(2)'
+  }),
+  singleValue: (provided, state) => ({
+      ...provided,
+      color: 'inherit'
+  }),
+  option: (base, state) => ({
+      ...base,
+      color: 'black',
+      fontSize: '17px'
+  })
+});
+
+export const RegistrationForm = ({ groups }) => {
   const [firstname, setFirstname] = useState('');
   const [lastname, setLastname] = useState('');
   const [middlename, setMiddlename] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfitmation, setPasswordConfitmation] = useState('');
-  const [isTeacher, setIsTeacher] = useState('');
-  const [academStatusId, setAcademStatusId] = useState('');
-  const [groupId, setGroupId] = useState('');
+  const [isTeacher, setIsTeacher] = useState(false);
+  const [academStatusId, setAcademStatusId] = useState({value: '', label: ''});
+  const [groupId, setGroupId] = useState(groups[0]);
+  const [academicStatus, setAcademicStatus] = useState([]);
+  const [error, setError] = useState('');
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const academicStatus = await getAllAcademicStatus();
+
+        const academicStatusOptions = academicStatus.data.map(item => ({ value: item.id, label: item.name }));
+        setAcademicStatus(academicStatusOptions);
+        academStatusId(academicStatusOptions[0]);
+      } catch (err) {
+        setError(JSON.stringify(err));
+        console.log(err);
+      }
+    })();
+  }, [])
+
+  const saveUser = async () => {
+    const req = {
+      firstname,
+      lastname,
+      middlename,
+      email,
+      password,
+      password_confitmation: passwordConfitmation,
+      is_teacher: isTeacher,
+    };
+
+    if (isTeacher) {
+      req['academ_status_id'] = academStatusId.value;
+    } else {
+      req['group_id'] = groupId.value;
+    }
+
+    try {
+      const result = await setRegistration(req);
+      console.log('result', result, req);
+    } catch(err) {
+      console.error(err);
+    }
+  };
+
+  useEffect(() => {
+    setError('');
+  }, [firstname,
+    lastname,
+    middlename,
+    email,
+    password,
+    passwordConfitmation,
+    isTeacher,
+    academStatusId,
+    groupId]);
 
   return (
     <div>
       <h2>Зареєструватися</h2>
 
-      <form className="authorization-block__form">
+      <form className="authorization-block__form" onSubmit={saveUser}>
         <label
           className="authorization-block__form--field-label"
         >
@@ -27,6 +124,7 @@ export const RegistrationForm = (groups) => {
               maxLength={50}
               required
               placeholder="Прізвище"
+              onChange={e => setFirstname(e.target.value)}
             />
 
             <input
@@ -34,6 +132,7 @@ export const RegistrationForm = (groups) => {
               maxLength={50}
               required
               placeholder="Ім'я"
+              onChange={e => setMiddlename(e.target.value)}
             />
 
             <input
@@ -41,11 +140,12 @@ export const RegistrationForm = (groups) => {
               maxLength={50}
               required
               placeholder="По батькові"
+              onChange={e => setLastname(e.target.value)}
             />
 
             <div>
               <label className="authorization-block__form--field-label--checked">
-                <input type='checkbox' />
+                <input type='checkbox' onChange={() => setIsTeacher(isTeacher => !isTeacher)}/>
                 Зареєструватися як викладач
               </label>
             </div>
@@ -62,6 +162,7 @@ export const RegistrationForm = (groups) => {
               maxLength={50}
               required
               placeholder="Електронна пошта"
+              onChange={e => setEmail(e.target.value)}
             />
           </label>
 
@@ -86,6 +187,7 @@ export const RegistrationForm = (groups) => {
               maxLength={50}
               required
               placeholder="Пароль"
+              onChange={e => setPassword(e.target.value)}
             />
           </label>
 
@@ -98,8 +200,40 @@ export const RegistrationForm = (groups) => {
               maxLength={50}
               required
               placeholder="Повторіть пароль"
+              onChange={e => setPasswordConfitmation(e.target.value)}
             />
           </label>
+
+          {!isTeacher ?
+            <div className="authorization-block__form--field-label">
+              Оберіть групу
+              <Select
+                value={groups[0]}
+                onChange={setGroupId}
+                options={groups}
+                id={"groups"}
+                className="groups"
+                styles={customStyles('44px')}
+              />
+            </div>
+            : <div
+                className="authorization-block__form--field-label"
+              >
+              Оберіть академічний статус
+              <Select
+                value={academStatusId}
+                onChange={setAcademStatusId}
+                options={academicStatus}
+                id={"academic-status"}
+                className="academic-status"
+                styles={customStyles('44px')}
+              />
+            </div>
+          }
+        </div>
+
+        <div className='error'>
+          {error}
         </div>
 
         <button

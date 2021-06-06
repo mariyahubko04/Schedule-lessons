@@ -12,13 +12,25 @@
     &-label {
       row-gap: 8px;
       margin: 0;
+
+      .academic-status, .groups {
+        border: 1px solid $additional-color;
+        box-shadow: inset 0px 0px 3.57px 1.43px rgba(0, 0, 0, 0.35);
+        width: 270px;
+        font-weight: 500;
+
+        input {
+          border: none;
+          box-shadow: none;
+        }
+      }
     }
 
-    input:not([type='checkbox']) {
+    input:not([type='checkbox']), .academic-status, .groups {
       display: block;
       min-width: 270px;
       width: 100%;
-      max-width: 300px;
+      max-width: 270px;
       height: 48px;
 
       @media screen and (max-width: 1350px) {
