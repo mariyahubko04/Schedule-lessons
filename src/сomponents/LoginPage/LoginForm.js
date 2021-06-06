@@ -19,9 +19,9 @@ export const LoginForm = ({ setLoginStatus }) => {
       const isLoginSucces = await setLogin({ email, password });
 
       const { data } = isLoginSucces;
-      const { firstname, lastname, middlename, api_token, role, email } = data;
+      const { firstname, lastname, middlename, api_token, role } = data;
       setLoginStatus(true);
-      sessionStorage.setItem("user", JSON.stringify({ firstname, lastname, middlename, email, token: api_token, role: role.name }));
+      sessionStorage.setItem("user", JSON.stringify({ firstname, lastname, middlename, email: data.email, token: api_token, role: role.name }));
       history.push('/profile');
     } catch (err) {
       setIsError(true);
