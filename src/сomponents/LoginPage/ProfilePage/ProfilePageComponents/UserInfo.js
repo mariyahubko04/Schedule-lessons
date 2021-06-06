@@ -7,18 +7,22 @@ export const UserInfo = () => {
     const [firstname, setFirstname] = useState(userInfo.firstname);
     const [lastname, setLastname] = useState(userInfo.lastname);
     const [middlename, setMiddlename] = useState(userInfo.middlename);
-    const [email, setEmail] = useState("");
+    const [email, setEmail] = useState(userInfo.email);
     const [password, setPassword] = useState("");
     const [passwordConfitmation, setPasswordConfitmation] = useState("");
-    const [isTeacher, setIsTeacher] = useState("");
+    const [isTeacher, setIsTeacher] = useState(userInfo.role === 'teacher');
     const [academStatusId, setAcademStatusId] = useState("");
     const [groupId, setGroupId] = useState("");
+
+    const saveUserInfo = () => {
+
+    };
 
     return (
         <div className='user-page'>
             <h2>Змінити дані</h2>
 
-            <form className="authorization-block__form">
+            <form className="authorization-block__form" onSubmit={saveUserInfo}>
                 <label className="authorization-block__form--field-label">
                     Введіть ваше Прізвише Ім'я по батькові
                     <div className="authorization-block__form--field">
@@ -58,6 +62,8 @@ export const UserInfo = () => {
                             type="email"
                             maxLength={50}
                             required
+                            value={email}
+                            onChange={e => setEmail(e.target.value)}
                             placeholder="Електронна пошта"
                         />
                     </label>
@@ -79,6 +85,8 @@ export const UserInfo = () => {
                             maxLength={50}
                             required
                             placeholder="Пароль"
+                            value={password}
+                            onChange={e => setPassword(e.target.value)}
                         />
                     </label>
 
@@ -89,6 +97,8 @@ export const UserInfo = () => {
                             maxLength={50}
                             required
                             placeholder="Повторіть пароль"
+                            value={passwordConfitmation}
+                            onChange={e => setPasswordConfitmation(e.target.value)}
                         />
                     </label>
                 </div>
