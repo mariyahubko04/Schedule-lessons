@@ -54,7 +54,9 @@ class App extends Component {
           </Route>
 
           <Route path="/profile">
-            <ProfilePage groups={groups} isLogin={isLogin}/>
+            {isLogin ?
+              <ProfilePage groups={groups} isLogin={isLogin} />
+              : <Login groups={groups} setLogin={this.setLogin} />}
           </Route>
 
           <Route component={NotFoundPage} />
