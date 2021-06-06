@@ -12,7 +12,8 @@ import { getGroups  } from './api/getDates';
 
 class App extends Component {
   state = {
-    groups: null
+    groups: null,
+    isLogin: false,
   };
 
   async componentDidMount() {
@@ -32,12 +33,16 @@ class App extends Component {
     }
   };
 
+  setLogin = isLogin => {
+    this.setState({ isLogin });
+  };
+
   render() {
-    const { groups } = this.state;
+    const { groups, isLogin } = this.state;
 
     return (
       <HashRouter>
-        <Header />
+        <Header isLogin={isLogin} setLoginStatus={this.setLogin}/>
 
         <Switch>
           <Route path="/" exact>
@@ -45,7 +50,7 @@ class App extends Component {
           </Route>
 
           <Route path="/login">
-            <Login groups={groups} />
+            <Login groups={groups} setLogin={this.setLogin}/>
           </Route>
 
           <Route path="/profile">

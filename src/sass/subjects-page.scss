@@ -4,20 +4,77 @@
   margin: 20px 50px;
 }
 
-.subjects-block__item {
+.subjects-block__item, .teachers-block__item {
   display: grid;
   align-items: center;
   justify-content: center;
   justify-items: center;
-  grid-template-columns: 600px 30px 30px;
-  column-gap: 10px;
+  grid-template-columns: 750px 35px;
+  grid-template-rows: 34px;
+  row-gap: 4px;
+  width: 790px;
+  margin: auto;
+  box-shadow: inset 0px 0px 2.57px 1.43px $additional-color;
 
   input:not([type = 'checkbox']) {
-    width: 650px;
-    box-shadow: inset 0px 0px -2.57px 1.43px $additional-color;
+    width: 750px;
+    height: 30px;
+    color: black;
+    padding: 0 10px;
+    font-size: 19px;
+    font-weight: 600;
+    font-variant: small-caps;
+    opacity: 0.9;
+    border: none;
 
     &:disabled {
       background: #fff;
+    }
+  }
+
+  button {
+    background: red;
+    border: none;
+    height: 30px;
+    cursor: pointer;
+    transition: 0.3s all;
+
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+}
+
+.btn-block {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  margin: 35px 0;
+
+  .subjects-save-btn, 
+  .teachers-save-btn {
+    margin: 0;
+    margin-left: 10px;
+  }
+
+  .added-btn {
+    width: 45px;
+    cursor: pointer;
+  }
+
+  button {
+    height: 40px;
+    background: $additional-color;
+    border: none;
+    transition: .3s all;
+
+    &:hover {
+      opacity: 0.7;
+    }
+
+    img {
+      height: 25px;
     }
   }
 }

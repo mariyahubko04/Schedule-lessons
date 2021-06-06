@@ -15,7 +15,7 @@ const days = {
   6: { label: "Субота", abbreviation: "Сб", value: 6 },
 };
 
-export const SheduleEditBlock = ({ groups, prevSubjects, prevCabinets, prevTeachers, prevLessonTypes }) => {
+export const SheduleEditBlock = ({ isAdmin, groups, prevSubjects, prevCabinets, prevTeachers, prevLessonTypes }) => {
   const [selectedWeek, setSelectedWeek] = useState(1);
   const [selectedDay, setSelectedDay] = useState(1);
   const [selectedGroup, setSelectedGroup] = useState(groups[0]);
@@ -25,8 +25,11 @@ export const SheduleEditBlock = ({ groups, prevSubjects, prevCabinets, prevTeach
   const [teachers, setTeachers] = useState([]);
   const [lessonTypes, setLessonTypes] = useState([]);
   const [isEdit, setIsEdit] = useState(false);
+  console.log('selectedGroup', selectedGroup);
 
   const getSheduleByGroupId = async (groupId) => {
+    if (!groupId ) return;
+
     try {
       const sheduleByGroup = await getSheduleByGroup(groupId);
       if (sheduleByGroup) {
@@ -49,13 +52,13 @@ export const SheduleEditBlock = ({ groups, prevSubjects, prevCabinets, prevTeach
           if (!result[parity][day_number])
             result[parity][day_number] = {};
           result[parity][day_number][lesson_number] = {
-            name: subject.name,
-            lessonType: lesson_type.name,
+            name: (subject || {}).name,
+            lessonType: (lesson_type || {}).name,
             teacher: {
-              status: academ_status.name,
+              status: (academ_status || {}).name,
               fio: `${firstname} ${middlename} ${lastname}`,
             },
-            cabinet: audience.number,
+            cabinet: (audience || {}).number,
           };
         }
 
@@ -67,17 +70,17 @@ export const SheduleEditBlock = ({ groups, prevSubjects, prevCabinets, prevTeach
   };
 
   const getSubjectsOptions = (subjects) => {
-    const { data } = subjects;
+    const { data } = subjects || {data: []};
     return data.map(item => ({ value: item.id, label: item.name }));
   };
 
-  const getCabinetsOptions = (subjects) => {
-    const { data } = subjects;
+  const getCabinetsOptions = (cabinets) => {
+    const { data } = cabinets || {data: []};
     return data.map(item => ({ value: item.id, label: item.number }));
   };
 
-  const getTeachersOptions = (subjects) => {
-    const { data } = subjects;
+  const getTeachersOptions = (teachers) => {
+    const { data } = teachers || {data: []};
     return data.map(item => ({ value: item.id, label: `${item.firstname} ${item.middlename} ${item.lastname} (${item.academ_status.name})` }));
   };
 
@@ -97,12 +100,12 @@ export const SheduleEditBlock = ({ groups, prevSubjects, prevCabinets, prevTeach
   const saveLesson = () => {};
 
   const handleNexDay = (isNext) => {
-    let newSelectedDay = selectedDay;
+    let newSelectedDay = +selectedDay;
 
     if (isNext) {
-      newSelectedDay = selectedDay === Object.keys(days).length ? 1 : selectedDay + 1;
+      newSelectedDay = +selectedDay === Object.keys(days).length ? 1 : +selectedDay + 1;
     } else {
-      newSelectedDay = selectedDay === 1 ? Object.keys(days).length : selectedDay - 1;
+      newSelectedDay = +selectedDay === 1 ? Object.keys(days).length : +selectedDay - 1;
     }
 
     setSelectedDay(newSelectedDay);
@@ -116,6 +119,7 @@ export const SheduleEditBlock = ({ groups, prevSubjects, prevCabinets, prevTeach
   }, []);
 
   useEffect(() => {
+    console.log('selectedGroup', selectedGroup);
     // при выборе группы запрашиваем новое расписание
     if (selectedGroup) getSheduleByGroupId(selectedGroup.value);
   }, [selectedGroup]);
@@ -139,6 +143,7 @@ export const SheduleEditBlock = ({ groups, prevSubjects, prevCabinets, prevTeach
               <div className={`day-week ${ isEdit ? 'disabled' : ''}`}>
                   {Object.keys(days).map((day) => (
                       <span
+                        key={day}
                         onClick={() => !isEdit ? setSelectedDay(day) : {}}
                         className={day == selectedDay ? "active" : ""}
                       >
@@ -147,7 +152,7 @@ export const SheduleEditBlock = ({ groups, prevSubjects, prevCabinets, prevTeach
                   ))}
               </div>
 
-              <div className="btn-block">
+              {isAdmin && <div className="btn-block">
                   <button
                     className="red"
                     disabled={!isEdit}
@@ -170,7 +175,7 @@ export const SheduleEditBlock = ({ groups, prevSubjects, prevCabinets, prevTeach
                   >
                     <img src="images/edit.png" alt="edit" />
                   </button>
-              </div>
+              </div>}
           </div>
 
           {!isEdit && <button

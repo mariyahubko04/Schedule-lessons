@@ -11,11 +11,11 @@ export const OneLesson = ({ lesson, lessonInfo, isEdit, subjectNames, cabinets, 
     const [selectedLessonType, setLessonType] = useState(emptyValue);
 
     const setLessonInfo = () => {
-        name && setName({ value: name, label: name });
-        teacher && setTeacherFio({ value: teacher.fio, label: teacher.fio });
-        teacher && setTeacherStatus({ value: teacher.status, label: teacher.status });
-        cabinet && setCabinet({ value: cabinet, label: cabinet });
-        lessonType && setLessonType({ value: lessonType, label: lessonType });
+        setName(name ? { value: name, label: name } : emptyValue);
+        setTeacherFio(teacher ? { value: teacher.fio, label: teacher.fio } : emptyValue);
+        setTeacherStatus(teacher ? { value: teacher.status, label: teacher.status } : emptyValue);
+        setCabinet(cabinet ? { value: cabinet, label: cabinet } : emptyValue);
+        setLessonType(lessonType ? { value: lessonType, label: lessonType } : emptyValue);
     };
 
     useEffect(() => setLessonInfo(), [lessonInfo]);

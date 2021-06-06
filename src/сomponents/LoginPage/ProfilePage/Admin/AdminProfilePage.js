@@ -12,22 +12,24 @@ import {
     getAllTeachers,
     getAllCabinets,
     getAllLessonTypes,
+    getAllAcademicStatus
 } from "../../../../api/getDates";
 import { useEffect } from "react";
 
 export const AdminProfilePage = ({ groups }) => {
     const [activeMenu, setActiveMenu] = useState(1);
     const [data, setData] = useState({});
-    const { subjects, teachers, cabinets, lessonTypes } = data;
+    const { subjects, teachers, cabinets, lessonTypes, academicStatus } = data;
 
     const getAllData = async () => {
         try {
-            const [subjects, teachers, cabinets, lessonTypes] =
+            const [subjects, teachers, cabinets, lessonTypes, academicStatus] =
                 await Promise.all([
                     getAllSubjects(),
                     getAllTeachers(),
                     getAllCabinets(),
                     getAllLessonTypes(),
+                    getAllAcademicStatus()
                 ]);
 
             const data = {
@@ -35,6 +37,7 @@ export const AdminProfilePage = ({ groups }) => {
                 teachers,
                 cabinets,
                 lessonTypes,
+                academicStatus
             };
             setData(data);
         } catch (err) {
@@ -42,9 +45,7 @@ export const AdminProfilePage = ({ groups }) => {
         }
     };
 
-    useEffect(() => {
-        getAllData();
-    }, []);
+    useEffect(() => getAllData(), []);
 
     return (
         <div className="profile">
@@ -52,24 +53,25 @@ export const AdminProfilePage = ({ groups }) => {
 
             {activeMenu === 1 && <BotsPage />}
             {activeMenu === 2 && groups && <UserInfo groups={groups} />}
-            {activeMenu === 3 && teachers && (
-                <TeachersInfo prevTeachers={teachers.data} />
-            )}
-            {activeMenu === 4 && groups && subjects && (
+            {activeMenu === 3 && teachers &&
+                <TeachersInfo prevTeachers={teachers.data} academicStatus={academicStatus} />
+            }
+            {activeMenu === 4 && groups && subjects &&
                 <SheduleEditBlock
+                    isAdmin={true}
                     groups={groups}
                     prevSubjects={subjects}
                     prevTeachers={teachers}
                     prevCabinets={cabinets}
                     prevLessonTypes={lessonTypes}
                 />
-            )}
-            {activeMenu === 5 && cabinets && (
+            }
+            {activeMenu === 5 && cabinets &&
                 <CabinetsPage prevCabinets={cabinets} />
-            )}
-            {activeMenu === 6 && subjects && (
+            }
+            {activeMenu === 6 && subjects &&
                 <SubjectsPage prevSubjects={subjects} />
-            )}
+            }
         </div>
     );
 };

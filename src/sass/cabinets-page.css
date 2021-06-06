@@ -17,7 +17,8 @@
   color: #fff;
   border: none;
   font-size: 20px;
-  margin: auto;
+  margin: 20px auto 0;
+  cursor: pointer;
 }
 
 .cabinets-page {

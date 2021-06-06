@@ -5,7 +5,7 @@ import RingLoader from "react-spinners/RingLoader";
 
 import { setLogin } from '../../api/getDates';
 
-export const LoginForm = () => {
+export const LoginForm = ({ setLoginStatus }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -20,6 +20,7 @@ export const LoginForm = () => {
 
       const { data } = isLoginSucces;
       const { firstname, lastname, middlename, api_token, role } = data;
+      setLoginStatus(true);
       sessionStorage.setItem("user", JSON.stringify({ firstname, lastname, middlename, token: api_token, role: role.name }));
       history.push('/profile');
     } catch (err) {

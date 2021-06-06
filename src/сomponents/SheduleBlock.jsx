@@ -47,10 +47,10 @@ export const SheduleBlock = ({groups}) => {
                     if (!result[parity][day_number])
                         result[parity][day_number] = {};
                     result[parity][day_number][lesson_number] = {
-                        name: subject.name,
-                        lessonType: lesson_type.name,
+                        name: (subject || {}).name,
+                        lessonType: (lesson_type || {}).name,
                         teacher: {
-                            status: academ_status.name,
+                            status: (academ_status || {}).name,
                             fio: `${firstname} ${middlename} ${lastname}`,
                         },
                         cabinet: audience.number,

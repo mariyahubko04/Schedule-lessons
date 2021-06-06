@@ -1,0 +1,59 @@
+.teachers-block {
+  width: 825px;
+  margin: 0 auto 10px;
+}
+
+.teachers-block__item {
+  width: 825px;
+  -ms-grid-columns: 750px 35px 31px;
+      grid-template-columns: 750px 35px 31px;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.teachers-block__item .active-teacher {
+  height: 31px;
+  width: 32px;
+  margin-left: 4px;
+  cursor: pointer;
+}
+
+.teachers-block .additional-text {
+  text-align: end;
+  margin: 0;
+  font-weight: 600;
+}
+
+.one-teacher {
+  display: -ms-grid;
+  display: grid;
+  -webkit-box-shadow: inset 0px 0px 2.57px 1.43px #0398fd;
+          box-shadow: inset 0px 0px 2.57px 1.43px #0398fd;
+}
+
+.one-teacher .teachers-block__item {
+  margin: 0;
+}
+
+.one-teacher .teachers-block__item button {
+  margin-top: 2px;
+  height: 34px;
+}
+
+.one-teacher .teachers-block__item .active-teacher {
+  height: 34px;
+  margin-top: 2px;
+}
+
+.teachers-info {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (1fr)[2];
+      grid-template-columns: repeat(2, 1fr);
+}
+
+.teachers-info .status, .teachers-info > div {
+  border-right: 1px solid #aaaaaa;
+  border-top: 1px solid #aaaaaa;
+}
+/*# sourceMappingURL=teachers-page.css.map */

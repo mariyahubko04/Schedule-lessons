@@ -1,0 +1,54 @@
+@import '../sass/variable.scss';
+
+.teachers-block {
+  width: 825px;
+  margin: 0 auto 10px;
+
+  &__item {
+    width: 825px;
+    grid-template-columns: 750px 35px 31px;
+    box-shadow: none;
+
+    .active-teacher {
+      height: 31px;
+      width: 32px;
+      margin-left: 4px;
+      cursor: pointer;
+    }
+  }
+
+  .additional-text {
+    text-align: end;
+    margin: 0;
+    font-weight: 600;
+  }
+}
+
+.one-teacher {
+  display: grid;
+  box-shadow: inset 0px 0px 2.57px 1.43px $additional-color;
+
+  .teachers-block__item {
+    margin: 0;
+
+    button {
+      margin-top: 2px;
+      height: 34px;
+    }
+
+    .active-teacher {
+      height: 34px;
+      margin-top: 2px;
+    }
+  }
+}
+
+.teachers-info {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+
+  .status, > div {
+    border-right: 1px solid $gray;
+    border-top: 1px solid $gray;
+  }
+}

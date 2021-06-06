@@ -335,3 +335,9 @@
     border: 2px solid transparent !important;
   }
 }
+
+.profile-student {
+  .shedule-edit .setting-block {
+    grid-template-columns: 315px 270px;
+  }
+}

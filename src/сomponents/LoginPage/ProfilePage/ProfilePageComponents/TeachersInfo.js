@@ -1,24 +1,93 @@
 import React from 'react';
 import { useState } from 'react';
 
-export const TeachersInfo = ({ prevTeachers }) => {
+import { TeacherItem } from './TeacherItem';
+
+export const TeachersInfo = ({ prevTeachers, academicStatus }) => {
   const [teachers, setTeachersInfo] = useState(prevTeachers);
+  const [newTeachers, setNewTeachersInfo] = useState([]);
+
+  const setUpdatedTeachers = (newValue, id) => {
+    const updatedTeachers = teachers.map(item => {
+      if (item.id !== id) return { ...item, ...newValue };
+      return item;
+    });
+    setTeachersInfo(updatedTeachers);
+  };
+
+  const setUpdatedNewTeachers = (newValue, id) => {
+    const updatedTeachers = newTeachers.map(item => {
+      if (item.id !== id) return { ...item, ...newValue };
+      return item;
+    });
+    setNewTeachersInfo(updatedTeachers);
+  };
+
+  const deleteTeacher = (id) => {
+    const updatedTeachers = teachers.filter(item => item.id !== id);
+    setTeachersInfo(updatedTeachers);
+  };
+
+  const deleteNewTeacher = (id) => {
+    const updatedTeachers = newTeachers.filter(item => item.id !== id);
+    setNewTeachersInfo(updatedTeachers);
+  };
+
+  const addNewTeacher = () => {
+    setNewTeachersInfo([...newTeachers, {
+      id: Date.now(),
+      firstname: '',
+      lastname: '',
+      middlename: '',
+      academ_status: (academicStatus.data || [])[0] || { id: '', name: ''},
+      email: ''
+    }]);
+  };
+
+  const isDisabled = () => {
+    return teachers.some(item => !item.firstname || !item.lastname || !item.middlename) ||
+      newTeachers.some(item => !item.firstname || !item.lastname || !item.middlename || !item.email);
+  };
 
   return <div className='teachers'>
     <h1>Виберіть завірених викладачів</h1>
 
-    <div className='subjects-block'>
+    <div className='teachers-block'>
+      <p className='additional-text'>Завірений</p>
+
       {teachers.map(item =>
-        <div key={item.id} className='teachers-block__item'>
-          <input disabled={true} value={`${item.firstname} ${item.middlename} ${item.lastname}`} />
+        <TeacherItem
+          key={`teacher-${item.id}`}
+          prevTeacher={item}
+          academicStatus={academicStatus.data || []}
+          setUpdatedTeacher={setUpdatedTeachers}
+          deleteTeacher={deleteTeacher}
+        />
+      )}
 
-          <button>x</button>
-
-          <input type='checkbox'></input>
-        </div>
+      {newTeachers.map(item =>
+        <TeacherItem
+          key={`new-teacher-${item.id}`}
+          isNewTeacher={true}
+          prevTeacher={item}
+          academicStatus={academicStatus.data || []}
+          setUpdatedTeacher={setUpdatedNewTeachers}
+          deleteTeacher={deleteNewTeacher}
+        />
       )}
     </div>
 
-    <button className="teachers-save-btn">Зберегти</button>
+    <div className='btn-block'>
+        <button className="added-btn" onClick={addNewTeacher}>
+            <img src="images/plus.svg" alt="added" />
+        </button>
+
+        <button
+          className="teachers-save-btn"
+          disabled={isDisabled()}
+        >
+          Зберегти
+        </button>
+    </div>
   </div>;
 };

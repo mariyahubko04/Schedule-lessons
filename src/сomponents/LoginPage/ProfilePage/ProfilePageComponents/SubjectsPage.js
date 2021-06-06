@@ -1,23 +1,79 @@
 import React, { useState } from 'react';
 
+import { OneSubject } from './OneSubject';
+
 export const SubjectsPage = ({ prevSubjects }) => {
-  const [subject, setSubjects] = useState(prevSubjects.data);
+  const [subjects, setSubjects] = useState(prevSubjects.data);
+  const [newSubjects, setNewSubjects] = useState([]);
 
-  return <div className='subjects'>
-    <h1>Список всіх предметів</h1>
+  const addNewSubject = () => {
+    setNewSubjects([...newSubjects, { id: Date.now(), name: '' }]);
+  };
 
-    <div className='subjects-block'>
-      {subject.map(item =>
-        <div key={item.id} className='subjects-block__item'>
-          <input disabled={true} value={item.name} />
+  const deleteNewSubject = (id) => {
+    setNewSubjects(newSubjects.filter((item) => item.id !== id));
+  };
 
-          <button>x</button>
+  const deleteCurrentSubject = (id) => {
+    setSubjects(subjects.filter((item) => item.id !== id));
+  };
 
-          <input type='checkbox'></input>
-        </div>
-      )}
+  const setNewSubject = (id, name) => {
+    setNewSubjects(newSubjects.map((item) => {
+      if (item.id === id) return { ...item, name };
+      return item;
+    }));
+  };
+
+  const setSubject = (id, name) => {
+    setSubjects(subjects.map((item) => {
+      if (item.id === id) return { ...item, name };
+      return item;
+    }));
+  };
+
+  const isDisabled = () => {
+    return subjects.some(item => !item.name) || newSubjects.some(item => !item.name);
+  };
+
+  return (
+    <div className="subjects">
+      <h1>Список всіх предметів</h1>
+
+      <div className="subjects-block">
+        {subjects.map(item => (
+          <OneSubject
+            key={item.id}
+            id={item.id}
+            prevSubject={item.name}
+            setNewSubject={setSubject}
+            deleteSubject={deleteCurrentSubject}
+          />
+        ))}
+
+        {newSubjects.map((item, number) => (
+          <OneSubject
+            key={`new-subj-${number}`}
+            id={item.id}
+            prevSubject={item.name}
+            setNewSubject={setNewSubject}
+            deleteSubject={deleteNewSubject}
+          />
+        ))}
+      </div>
+
+      <div className='btn-block'>
+        <button className="added-btn" onClick={addNewSubject}>
+          <img src="images/plus.svg" alt="added" />
+        </button>
+
+        <button 
+          className="subjects-save-btn"
+          disabled={isDisabled()}
+        >
+          Зберегти
+        </button>
+      </div>
     </div>
-
-    <button className="subjects-save-btn">Зберегти</button>
-  </div>;
+  );
 };

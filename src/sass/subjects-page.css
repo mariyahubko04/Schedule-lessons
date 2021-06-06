@@ -2,7 +2,7 @@
   margin: 20px 50px;
 }
 
-.subjects-block__item {
+.subjects-block__item, .teachers-block__item {
   display: -ms-grid;
   display: grid;
   -webkit-box-align: center;
@@ -12,19 +12,84 @@
       -ms-flex-pack: center;
           justify-content: center;
   justify-items: center;
-  -ms-grid-columns: 600px 30px 30px;
-      grid-template-columns: 600px 30px 30px;
-  -webkit-column-gap: 10px;
-          column-gap: 10px;
+  -ms-grid-columns: 750px 35px;
+      grid-template-columns: 750px 35px;
+  -ms-grid-rows: 34px;
+      grid-template-rows: 34px;
+  row-gap: 4px;
+  width: 790px;
+  margin: auto;
+  -webkit-box-shadow: inset 0px 0px 2.57px 1.43px #0398fd;
+          box-shadow: inset 0px 0px 2.57px 1.43px #0398fd;
 }
 
-.subjects-block__item input:not([type='checkbox']) {
-  width: 650px;
-  -webkit-box-shadow: inset 0px 0px -2.57px 1.43px #0398fd;
-          box-shadow: inset 0px 0px -2.57px 1.43px #0398fd;
+.subjects-block__item input:not([type='checkbox']), .teachers-block__item input:not([type='checkbox']) {
+  width: 750px;
+  height: 30px;
+  color: black;
+  padding: 0 10px;
+  font-size: 19px;
+  font-weight: 600;
+  font-variant: small-caps;
+  opacity: 0.9;
+  border: none;
 }
 
-.subjects-block__item input:not([type='checkbox']):disabled {
+.subjects-block__item input:not([type='checkbox']):disabled, .teachers-block__item input:not([type='checkbox']):disabled {
   background: #fff;
+}
+
+.subjects-block__item button, .teachers-block__item button {
+  background: red;
+  border: none;
+  height: 30px;
+  cursor: pointer;
+  -webkit-transition: 0.3s all;
+  transition: 0.3s all;
+}
+
+.subjects-block__item button:hover, .teachers-block__item button:hover {
+  opacity: 0.7;
+}
+
+.btn-block {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  height: 40px;
+  margin: 35px 0;
+}
+
+.btn-block .subjects-save-btn,
+.btn-block .teachers-save-btn {
+  margin: 0;
+  margin-left: 10px;
+}
+
+.btn-block .added-btn {
+  width: 45px;
+  cursor: pointer;
+}
+
+.btn-block button {
+  height: 40px;
+  background: #0398fd;
+  border: none;
+  -webkit-transition: .3s all;
+  transition: .3s all;
+}
+
+.btn-block button:hover {
+  opacity: 0.7;
+}
+
+.btn-block button img {
+  height: 25px;
 }
 /*# sourceMappingURL=subjects-page.css.map */

@@ -16,7 +16,7 @@ export const CabinetsPage = ({ prevCabinets }) => {
             context.push(
                 <div key={i} className="one-floor">
                     {filterCabinets.map((item) =>
-                        <CabinetItem prevNumber={item.number} floor={i} />
+                        <CabinetItem key={item.number} prevNumber={item.number} floor={i} />
                     )}
                 </div>
             );

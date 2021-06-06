@@ -11,6 +11,7 @@
 @import "./sass/user-info.css";
 @import "./sass/cabinets-page.css";
 @import "./sass/subjects-page.css";
+@import "./sass//teachers-page.css";
 @import "./sass/mobile-version.css";
 @import url("./sass/fonts/futura/style.css");
 
@@ -32,4 +33,9 @@ span.css-1n5ab60 {
 .disabled span {
   opacity: 0.6;
   cursor: not-allowed !important;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: no-drop;
 }

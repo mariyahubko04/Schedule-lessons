@@ -1,8 +1,7 @@
 import React from 'react';
 
 import { AdminProfilePage } from './Admin/AdminProfilePage';
-import { StudentProfilePage } from './Student/StudentProfilePage';
-import { TeacherProfilePage } from './Teacher/TeacherProfilePage';
+import { StudentOrTeacherProfilePage } from './StudentAndTeacher/StudentAndTeacherProfilePage';
 
 export const ProfilePage = ({ groups }) => {
   const user = sessionStorage.getItem('user');
@@ -12,7 +11,6 @@ export const ProfilePage = ({ groups }) => {
     <div className="header__additional-block" />
 
     {role === 'admin' && <AdminProfilePage groups={groups}/>}
-    {role === 'student' && <StudentProfilePage />}
-    {role === 'teacher' && <TeacherProfilePage />}
+    {(role === 'student' || role === 'teacher') && groups && <StudentOrTeacherProfilePage groups={groups} />}
   </div>;
 }

@@ -13,7 +13,7 @@ const lessons = [
     { number: 8, timeStart: "19:10", timeFinish: "20:30" },
 ];
 
-export const OneDayShedule = ({day, isActive, sheduleByDay, isEdit, subjectNames, cabinets, teachers, lessonTypes}) => {
+export const OneDayShedule = ({ day, isActive, sheduleByDay, isEdit, subjectNames, cabinets, teachers, lessonTypes}) => {
     return (
         <div
             className={`shedule-block__section--one-day ${isActive ? "active" : ""}`}
@@ -24,6 +24,7 @@ export const OneDayShedule = ({day, isActive, sheduleByDay, isEdit, subjectNames
 
             {lessons.map((lesson, numberLesson) => (
                 <OneLesson
+                    key={`edit-${numberLesson}${subjectNames}${day}`}
                     isEdit={isEdit}
                     lesson={lesson}
                     lessonInfo={(sheduleByDay || {})[numberLesson + 1]}
