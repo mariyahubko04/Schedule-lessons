@@ -51,8 +51,22 @@
       margin-left: 7px;
       background: $background-color;
 
-      a {
+      button {
         color: $additional-color;
+        width: 100%;
+        height: 100%;
+        border: none;
+        background: transparent;
+        cursor: pointer;
+        transition: 0.3s all;
+
+        &:hover {
+          text-decoration: underline;
+        }
+
+        &:focus {
+          outline: none;
+        }
       }
     }
   }

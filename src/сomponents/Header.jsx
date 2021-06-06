@@ -1,8 +1,16 @@
 import React from 'react';
 import { useEffect } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 
 export const Header = ({ isLogin, setLoginStatus }) => {
+  const history = useHistory();
+
+  const setLogin = () => {
+    setLoginStatus(false);
+    sessionStorage.removeItem('user');
+    history.push(isLogin ? '/' : "/login");
+  };
+
   useEffect(() => {
     return () => setLoginStatus(false);
   }, []);
@@ -31,9 +39,9 @@ return <header className='header'>
         </li>
 
         <li className='header__block--navbar--link login-link flex-center'>
-          <NavLink className="navlink" to={isLogin ? '/' : "/login"} exact>
+          <button className="navlink" onClick={setLogin}>
             {isLogin ? 'Вийти' : 'Вхід'}
-          </NavLink>
+          </button>
         </li>
       </ul>
     </nav>
