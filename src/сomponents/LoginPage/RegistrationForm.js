@@ -64,7 +64,7 @@ export const RegistrationForm = ({ groups }) => {
 
         const academicStatusOptions = academicStatus.data.map(item => ({ value: item.id, label: item.name }));
         setAcademicStatus(academicStatusOptions);
-        academStatusId(academicStatusOptions[0]);
+        setAcademStatusId(academicStatusOptions[0]);
       } catch (err) {
         if(err) setError(JSON.stringify(err));
         console.log(err);
