@@ -1,7 +1,7 @@
 import React from 'react';
 
 export const NotFoundPage = () => (
-  <div class="container">
+  <div class="container-error">
     <div class="row">
       <div class="col-md-12">
         <div class="error-template">
