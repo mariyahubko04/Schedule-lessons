@@ -55,6 +55,12 @@
           justify-content: center;
 }
 
+.header__block .profile-btn {
+  width: 200px;
+  height: 45px;
+  margin-left: 10px;
+}
+
 .header__block .login-link {
   margin-left: 7px;
   background: #fff;

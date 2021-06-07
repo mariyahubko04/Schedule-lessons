@@ -86,7 +86,6 @@ export const LoginForm = ({ setLoginStatus }) => {
             Увійти
           </button>
         </form>
-
         <RingLoader loading={isProgress} />
       </div>
     </>

@@ -72,8 +72,10 @@ export const TeacherItem = ({ isNewTeacher, prevTeacher, academicStatus, deleteT
   return <div className='one-teacher'>
     <div key={item.id} className='teachers-block__item'>
       <input
+        type='text'
         onChange={setNewName}
         value={fio}
+        // placeholder={'Введіть ПІБ викладача'}
       />
 
       <button onClick={() => deleteTeacher(item.id)}>
@@ -102,7 +104,12 @@ export const TeacherItem = ({ isNewTeacher, prevTeacher, academicStatus, deleteT
         <div>
           {item.email}
         </div> 
-        : <input type='text' value={email} onChange={changeEmail}/>}
+        : <input
+        type='text'
+        value={email}
+        onChange={changeEmail}
+        //placeholder='Введіть електронну адресу'
+      />}
     </div>
   </div>
 };

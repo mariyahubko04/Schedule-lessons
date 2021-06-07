@@ -38,6 +38,14 @@ return <header className='header'>
           </NavLink>
         </li>
 
+        {isLogin && 
+            <li className='header__block--navbar--link flex-center profile-btn'>
+            <NavLink className="navlink" to="/profile" exact>
+              Особистий кабінет
+            </NavLink>
+          </li>
+        }
+
         <li className='header__block--navbar--link login-link flex-center'>
           <button className="navlink" onClick={setLogin}>
             {isLogin ? 'Вийти' : 'Вхід'}

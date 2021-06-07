@@ -16,7 +16,7 @@ export const Login = ({ groups, setLogin }) => {
 
                 <div className='login-block__section--line' />
 
-                {groups && <RegistrationForm groups={groups}/>}
+                {groups && <RegistrationForm groups={groups} setLoginStatus={setLogin}/>}
             </div>
         </div>
     );

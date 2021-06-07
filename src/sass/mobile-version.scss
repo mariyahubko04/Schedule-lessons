@@ -1,3 +1,5 @@
+@import './variable.scss';
+
 @media screen and (max-width: 900px) {
   .login-block h2 {
     margin-bottom: 30px;
@@ -64,16 +66,25 @@
 
 @media screen and (max-width: 780px) {
   .header__block {
-    display: grid !important;
-    grid-template-rows: 1fr 1fr;
-    height: 150px;
-    row-gap: 10px;
+    height: 305px !important;
     justify-content: center;
     margin-bottom: 15px;
   }
 
   .header__block--navbar {
+    flex-flow: column;
+    width: 300px;
     padding: 0;
+
+    li {
+      margin-top: 15px;
+      a, button{
+        width: 300px;
+      }
+    }
+    .profile-btn {
+      width: 300px;
+    }
   }
 
   .header__block--navbar--link {
@@ -368,6 +379,12 @@
   .teachers-info {
     grid-template-columns: 1fr;
 
+    &>input {
+      width: 329px;
+      margin: 2px auto;
+      border: 1px solid $gray;
+    }
+
     &>div:not(.status) {
       text-align: start;
       padding-left: 15px;
@@ -425,5 +442,114 @@
   .subjects-block__item {
     grid-template-columns: 250px 35px;
     width: 292px;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .bot-page__info {
+      justify-content: center;
+      display: flex;
+      flex-direction: column;
+      align-content: center;
+      align-items: center;
+  }
+
+  .bot-page__info > .bot-page__info--link {
+      margin-right: 0;
+      margin-bottom: 20px;
+      width: 300px;
+  }
+  .bot-page__image {
+      width: auto;
+      height: auto;
+  }
+  .user-info > .photo-block {
+      display: none;
+  }
+  .user-info {
+      display: flex!important;
+      justify-content: center;
+  }
+  .profile {
+      grid-template-columns: 250px 1fr;
+  }
+  .menu-block > div > .menu-item  {
+      line-height: 15px!important;
+  }
+  .menu-item.active {
+      padding-left: 5px!important;
+  }
+  .exit-btn {
+      line-height: 15px!important;
+  }
+
+  .authorization-block__form--field {
+      grid-template-columns: repeat(1, 300px)!important;
+      justify-content: center;
+  }
+  .authorization-block__form--field > label > input, .authorization-block__form--field > input {
+      width: 100%!important;
+      max-width: inherit!important;
+  }
+  
+}
+
+@media screen and (max-width: 900px) {
+  .profile {
+      display: inherit;
+  }
+}
+
+@media screen and (max-width: 1450px) {
+  .prev-btn, .next-btn {
+      top: 22%!important;
+  }
+  .prev-btn {
+      left: 28%!important;
+  }
+  .next-btn {
+      right: 28%!important;
+  }
+  .setting-block {
+      grid-template-columns: repeat(1, 325px)!important;
+  }
+  .day-week {
+      margin-top: 10px;
+      justify-content: center;
+  }
+  .btn-block {
+      margin-top: 10px;
+      margin-bottom: 10px;
+  }
+  .shedule-block__section--one-day.active {
+      width: 320px!important;
+      padding-top: 100px!important;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .shedule-block__select-group.css-2b097c-container {
+      max-width: 325px;
+  }
+  .setting-block {
+      justify-items: center;
+  }
+  .setting-block > div {
+      min-width: 325px;
+  }
+  .shedule-block__section--one-day.active {
+      width: 320px!important;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .header__block {
+    flex-flow: column;
+    justify-content: center;
+    height: 165px;
+
+    nav {
+      margin-top: 20px;
+    }
   }
 }

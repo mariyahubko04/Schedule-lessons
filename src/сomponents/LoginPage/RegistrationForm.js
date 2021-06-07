@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import PhoneInput from 'react-phone-number-input/input';
 import Select from "react-select"; 
+import { useHistory } from "react-router-dom";
 
 import { getAllAcademicStatus, setRegistration } from '../../api/getDates';
 
@@ -44,7 +45,7 @@ const customStyles = (height, background) => ({
   })
 });
 
-export const RegistrationForm = ({ groups }) => {
+export const RegistrationForm = ({ groups, setLoginStatus }) => {
   const [firstname, setFirstname] = useState('');
   const [lastname, setLastname] = useState('');
   const [middlename, setMiddlename] = useState('');
@@ -56,6 +57,7 @@ export const RegistrationForm = ({ groups }) => {
   const [groupId, setGroupId] = useState(groups[0]);
   const [academicStatus, setAcademicStatus] = useState([]);
   const [error, setError] = useState('');
+  const history = useHistory();
 
   useEffect(() => {
     (async () => {
@@ -79,7 +81,7 @@ export const RegistrationForm = ({ groups }) => {
       middlename,
       email,
       password,
-      password_confitmation: passwordConfitmation,
+      password_confirmation: passwordConfitmation,
       is_teacher: isTeacher,
     };
 
@@ -90,9 +92,13 @@ export const RegistrationForm = ({ groups }) => {
     }
 
     try {
-      const result = await setRegistration(req);
-      console.log('result', result, req);
+      const data = await setRegistration(req);
+      const { firstname, lastname, middlename, api_token, role } = data.data;
+      setLoginStatus(true);
+      sessionStorage.setItem("user", JSON.stringify({ firstname, lastname, middlename, email: data.email, token: api_token, role: role.name }));
+      history.push('/profile');
     } catch(err) {
+      setError(JSON.stringify(err.message));
       console.error(err);
     }
   };
@@ -208,7 +214,7 @@ export const RegistrationForm = ({ groups }) => {
             <div className="authorization-block__form--field-label">
               Оберіть групу
               <Select
-                value={groups[0]}
+                value={groupId}
                 onChange={setGroupId}
                 options={groups}
                 id={"groups"}
