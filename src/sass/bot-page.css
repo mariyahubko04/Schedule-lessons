@@ -18,6 +18,11 @@
   width: 100%;
 }
 
+.bot-page form .bot-page__identificator-label,
+.bot-page form .bot-page__identificator-label p {
+  margin-bottom: 0;
+}
+
 .bot-page form input {
   border: 2px solid #aaaaaa;
   height: 35px;
@@ -49,6 +54,10 @@
   opacity: 0.7;
   font-weight: 600;
   font-size: 15px;
+}
+
+.bot-page form .btn-block {
+  margin-top: 20px;
 }
 
 .bot-page__info {

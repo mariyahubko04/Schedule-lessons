@@ -78,10 +78,6 @@ export const TeachersInfo = ({ prevTeachers, academicStatus }) => {
     </div>
 
     <div className='btn-block'>
-        <button className="added-btn" onClick={addNewTeacher}>
-            <img src="images/plus.svg" alt="added" />
-        </button>
-
         <button
           className="teachers-save-btn"
           disabled={isDisabled()}

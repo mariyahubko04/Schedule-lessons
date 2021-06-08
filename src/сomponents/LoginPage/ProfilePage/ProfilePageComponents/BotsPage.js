@@ -13,6 +13,14 @@ export const BotsPage = () => {
         <input placeholder='Ідентифікатор' />
         <p>Ідентифікатор можна дізнатися в меседжері Telegram</p>
       </label>
+
+      <div className='btn-block'>
+        <button
+          className="teachers-save-btn"
+        >
+          Зберегти
+        </button>
+      </div>
     </form>
 
     <div className="header__additional-block">
