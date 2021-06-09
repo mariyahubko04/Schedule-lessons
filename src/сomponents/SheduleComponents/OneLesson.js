@@ -54,7 +54,7 @@ export const OneLesson = ({ lesson, lessonInfo, isCancel, selectedGroup, isSave,
                         !selectedCabinet.value ||
                         !parity ||
                         !week_day_id
-                    ) return;
+                    ) return setLessonInfo();
 
                     const req = {
                         subject_id: selectedName.value,
@@ -74,6 +74,7 @@ export const OneLesson = ({ lesson, lessonInfo, isCancel, selectedGroup, isSave,
                     }
                 }
             } catch (err) {
+                setLessonInfo();
                 console.error(err);
             }
         })();

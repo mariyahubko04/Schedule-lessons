@@ -46,8 +46,6 @@ export const MenuBlock = ({ activeMenu, setActiveMenu }) => {
                     Редагування предметів
                 </div>
             </div>
-
-            <ExitBtn />
         </div>
     );
 };
