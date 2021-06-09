@@ -508,7 +508,7 @@
     margin-top: 10px;
     margin-bottom: 10px;
   }
-  .shedule-block__section--one-day.active {
+  .shedule-edit .shedule-block__section--one-day.active {
     width: 320px !important;
     padding-top: 100px !important;
   }

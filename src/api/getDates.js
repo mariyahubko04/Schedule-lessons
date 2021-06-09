@@ -66,3 +66,63 @@ export const getAllLessonTypes = async () => {
 
   return data;
 };
+
+export const setProfileInfo = async (param) => {
+  const user = sessionStorage.getItem('user');
+  const userInfo= JSON.parse(user);
+  const { token, email } = userInfo;
+  const response = await axios.post(`/profile`, param, {
+    headers: {
+      "X-Auth-Token": token,
+      "X-Auth-email": email
+    }
+  });
+  const { data } = response;
+
+  return data;
+};
+
+export const setNewLesson = async (param) => {
+  const user = sessionStorage.getItem('user');
+  const userInfo= JSON.parse(user);
+  const { token, email } = userInfo;
+  const response = await axios.post(`/schedule`, param, {
+    headers: {
+      "X-Auth-Token": token,
+      "X-Auth-email": email
+    }
+  });
+  const { data } = response;
+
+  return data;
+};
+
+export const editLesson = async (id, param) => {
+  const user = sessionStorage.getItem('user');
+  const userInfo= JSON.parse(user);
+  const { token, email } = userInfo;
+  const response = await axios.put(`/schedule/${id}`, param, {
+    headers: {
+      "X-Auth-Token": token,
+      "X-Auth-email": email
+    }
+  });
+  const { data } = response;
+
+  return data;
+};
+
+export const deleteLesson = async (id) => {
+  const user = sessionStorage.getItem('user');
+  const userInfo= JSON.parse(user);
+  const { token, email } = userInfo;
+  const response = await axios.delete(`/schedule/${id}`, {
+    headers: {
+      "X-Auth-Token": token,
+      "X-Auth-email": email
+    }
+  });
+  const { data } = response;
+
+  return data;
+};

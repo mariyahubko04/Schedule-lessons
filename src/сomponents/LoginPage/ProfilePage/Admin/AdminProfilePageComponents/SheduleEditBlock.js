@@ -25,6 +25,8 @@ export const SheduleEditBlock = ({ isAdmin, groups, prevSubjects, prevCabinets, 
   const [teachers, setTeachers] = useState([]);
   const [lessonTypes, setLessonTypes] = useState([]);
   const [isEdit, setIsEdit] = useState(false);
+  const [isSave, setIsSave] = useState(false);
+  const [isCancel, setIsCancel] = useState(false);
 
   const getSheduleByGroupId = async (groupId) => {
     if (!groupId ) return;
@@ -44,6 +46,7 @@ export const SheduleEditBlock = ({ isAdmin, groups, prevSubjects, prevCabinets, 
             lesson_type,
             teacher,
             audience,
+            id
           } = lesson;
           const { day_number } = week_day;
           const { academ_status, firstname, lastname, middlename } =
@@ -51,13 +54,14 @@ export const SheduleEditBlock = ({ isAdmin, groups, prevSubjects, prevCabinets, 
           if (!result[parity][day_number])
             result[parity][day_number] = {};
           result[parity][day_number][lesson_number] = {
-            name: (subject || {}).name,
-            lessonType: (lesson_type || {}).name,
+            id,
+            name: { value: (subject || {}).id, label: (subject || {}).name },
+            lessonType: { value: (lesson_type || {}).id, label: (lesson_type || {}).name },
             teacher: {
-              status: (academ_status || {}).name,
-              fio: `${firstname} ${middlename} ${lastname}`,
+              status: { value: (academ_status || {}).id, label: (academ_status || {}).name },
+              fio: { value: (teacher || {}).id, label: `${firstname} ${middlename} ${lastname}` },
             },
-            cabinet: (audience || {}).number,
+            cabinet: { value: (audience || {}).id, label: (audience || {}).number },
           };
         }
 
@@ -94,9 +98,15 @@ export const SheduleEditBlock = ({ isAdmin, groups, prevSubjects, prevCabinets, 
     }
   };
 
-  const cancelChanged = () => setIsEdit(false);
+  const cancelChanged = () => {
+    setIsEdit(false);
+    setIsCancel(isCancel => !isCancel);
+  };
 
-  const saveLesson = () => {};
+  const saveLesson = () => {
+    setIsSave(true);
+    setIsEdit(false);
+  };
 
   const handleNexDay = (isNext) => {
     let newSelectedDay = +selectedDay;
@@ -161,6 +171,7 @@ export const SheduleEditBlock = ({ isAdmin, groups, prevSubjects, prevCabinets, 
 
                   <button
                     className="blue"
+                    disabled={!isEdit}
                     onClick={saveLesson}
                   >
                     <img src="images/save.png" alt="save" />
@@ -183,13 +194,18 @@ export const SheduleEditBlock = ({ isAdmin, groups, prevSubjects, prevCabinets, 
 
           <OneDayShedule
               isActive={true}
+              isSave={isSave}
               isEdit={isEdit}
+              isCancel={isCancel}
               day={days[selectedDay].label}
               sheduleByDay={sheduleByGroup[selectedWeek][selectedDay]}
               subjectNames={subjectNames}
               cabinets={cabinets}
               teachers={teachers}
               lessonTypes={lessonTypes}
+              week_day_id={selectedDay}
+              parity={selectedWeek}
+              selectedGroup={selectedGroup}
           />
 
           {!isEdit && <button

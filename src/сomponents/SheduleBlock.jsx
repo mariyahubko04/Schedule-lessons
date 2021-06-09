@@ -25,6 +25,8 @@ export const SheduleBlock = ({groups}) => {
     const currendDayWeek = date.getDay() - 1;
 
     const getSheduleByGroupId = async (groupId) => {
+        if (!groupId) return;
+
         try {
             const sheduleByGroup = await getSheduleByGroup(groupId);
             if (sheduleByGroup) {
@@ -40,6 +42,7 @@ export const SheduleBlock = ({groups}) => {
                         lesson_type,
                         teacher,
                         audience,
+                        id,
                     } = lesson;
                     const { day_number } = week_day;
                     const { academ_status, firstname, lastname, middlename } =
@@ -47,13 +50,29 @@ export const SheduleBlock = ({groups}) => {
                     if (!result[parity][day_number])
                         result[parity][day_number] = {};
                     result[parity][day_number][lesson_number] = {
-                        name: (subject || {}).name,
-                        lessonType: (lesson_type || {}).name,
-                        teacher: {
-                            status: (academ_status || {}).name,
-                            fio: `${firstname} ${middlename} ${lastname}`,
+                        id,
+                        name: {
+                            value: (subject || {}).id,
+                            label: (subject || {}).name,
                         },
-                        cabinet: audience.number,
+                        lessonType: {
+                            value: (lesson_type || {}).id,
+                            label: (lesson_type || {}).name,
+                        },
+                        teacher: {
+                            status: {
+                                value: (academ_status || {}).id,
+                                label: (academ_status || {}).name,
+                            },
+                            fio: {
+                                value: (teacher || {}).id,
+                                label: `${firstname} ${middlename} ${lastname}`,
+                            },
+                        },
+                        cabinet: {
+                            value: (audience || {}).id,
+                            label: (audience || {}).number,
+                        },
                     };
                 }
 

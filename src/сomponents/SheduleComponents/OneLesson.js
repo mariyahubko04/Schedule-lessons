@@ -1,28 +1,83 @@
 import React, { useState, useEffect } from "react";
 import Select from "react-select";
 
-export const OneLesson = ({ lesson, lessonInfo, isEdit, subjectNames, cabinets, teachers, lessonTypes }) => {
+import { setNewLesson, editLesson, deleteLesson } from '../../api/getDates';
+
+export const OneLesson = ({ lesson, lessonInfo, isCancel, selectedGroup, isSave, isEdit, subjectNames, cabinets, teachers, lessonTypes, parity, week_day_id }) => {
     const emptyValue = { value: null, label: "Пусто" };
-    const { name, cabinet, teacher, lessonType } = lessonInfo || { name: '', cabinet: '', teacher: '', lessonType: '' };
-    const [selectedName, setName] = useState(emptyValue);
-    const [selectedCabinet, setCabinet] = useState(emptyValue);
-    const [selectedTeacherFio, setTeacherFio] = useState(emptyValue);
-    const [selectedTeacherStatus, setTeacherStatus] = useState(emptyValue);
-    const [selectedLessonType, setLessonType] = useState(emptyValue);
+    const { id, name, cabinet, teacher, lessonType } = lessonInfo || { name: '', cabinet: '', teacher: '', lessonType: '' };
+    const [selectedName, setName] = useState(name || emptyValue);
+    const [selectedCabinet, setCabinet] = useState(cabinet || emptyValue);
+    const [selectedTeacherFio, setTeacherFio] = useState(teacher.fio || emptyValue);
+    const [selectedTeacherStatus, setTeacherStatus] = useState(teacher.status || emptyValue);
+    const [selectedLessonType, setLessonType] = useState(lessonType || emptyValue);
 
     const setLessonInfo = () => {
-        setName(name ? { value: name, label: name } : emptyValue);
-        setTeacherFio(teacher ? { value: teacher.fio, label: teacher.fio } : emptyValue);
-        setTeacherStatus(teacher ? { value: teacher.status, label: teacher.status } : emptyValue);
-        setCabinet(cabinet ? { value: cabinet, label: cabinet } : emptyValue);
-        setLessonType(lessonType ? { value: lessonType, label: lessonType } : emptyValue);
+        setName(name || emptyValue);
+        setTeacherFio(teacher.fio || emptyValue);
+        setTeacherStatus(teacher.status || emptyValue);
+        setCabinet(cabinet || emptyValue);
+        setLessonType(lessonType || emptyValue);
     };
+
+    const setEmptyLessonInfo = () => {
+        setName(emptyValue);
+        setTeacherFio(emptyValue);
+        setTeacherStatus(emptyValue);
+        setCabinet(emptyValue);
+        setLessonType(emptyValue);
+    };
+
 
     useEffect(() => setLessonInfo(), [lessonInfo]);
 
     useEffect(() => {
-        if (!isEdit) setLessonInfo();
-    }, [isEdit]);
+        setLessonInfo();
+    }, [isCancel]);
+
+    useEffect(() => {
+        if(!selectedName.value) setEmptyLessonInfo();
+    }, [selectedName.value]);
+
+    useEffect(() => {
+        (async () => {
+            try {
+                if (isSave) {
+                    if(!selectedName.value && id) {
+                        await deleteLesson(id);
+                    }
+
+                    if(!selectedName.value ||
+                        !selectedTeacherFio.value ||
+                        !lesson.number ||
+                        !selectedLessonType.value ||
+                        !selectedCabinet.value ||
+                        !parity ||
+                        !week_day_id
+                    ) return;
+
+                    const req = {
+                        subject_id: selectedName.value,
+                        teacher_id: selectedTeacherFio.value,
+                        time_id: lesson.number,
+                        lesson_type_id: selectedLessonType.value,
+                        audience_id: selectedCabinet.value,
+                        group_id: selectedGroup.value,
+                        parity,
+                        week_day_id,
+                    };
+
+                    if (!id) {
+                        await setNewLesson(req);
+                    } else {
+                        await editLesson(id, req);
+                    }
+                }
+            } catch (err) {
+                console.error(err);
+            }
+        })();
+    }, [isSave]);
 
     const customStyles = (height, background) => ({
         control: (provided, state) => ({
@@ -78,7 +133,7 @@ export const OneLesson = ({ lesson, lessonInfo, isEdit, subjectNames, cabinets, 
                     {isEdit ? <Select
                         value={selectedName}
                         onChange={setName}
-                        options={subjectNames}
+                        options={[{ value: null, label: 'Пусто'} , ...subjectNames]}
                         id={"group"}
                         className="shedule-block__select-group subject-name"
                         isDisabled={!isEdit}
@@ -96,7 +151,7 @@ export const OneLesson = ({ lesson, lessonInfo, isEdit, subjectNames, cabinets, 
                                 styles={customStyles('24px')}
                             />
                         </>
-                    ) : name && <p className="teacher">
+                    ) : selectedName.label && <p className="teacher">
                         {`${selectedTeacherFio.label}(${selectedTeacherStatus.label})`}
                     </p>}
                 </div>
@@ -121,7 +176,7 @@ export const OneLesson = ({ lesson, lessonInfo, isEdit, subjectNames, cabinets, 
                                 styles={customStyles('25px', 'transparent')}
                             />
                         </>
-                    ): name && `${lessonType || ""} / ауд. ${cabinet}`}
+                    ): selectedName.label && `${selectedLessonType.label || ""} / ауд. ${selectedCabinet.label}`}
                 </div>
             </div>
         </div>
