@@ -307,8 +307,8 @@ export const setNewCabinet = (param) => {
         }
       });
 
-      dispatch(setCabinet(response.data));
-      return response.data;
+      dispatch(setCabinet(response.data.data));
+      return response.data.data;
     } catch (e) {
       throw new Error(getErrors(e));
     }
@@ -338,8 +338,8 @@ export const editCabinet = (id, param) => {
         }
       });
 
-      dispatch(editCabinets(response.data));
-      return response.data;
+      dispatch(editCabinets(response.data.data));
+      return response.data.data;
     } catch (e) {
       throw new Error(getErrors(e));
     }

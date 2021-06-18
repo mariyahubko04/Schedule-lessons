@@ -82,4 +82,46 @@
 .cabinets-page .error input {
   color: red;
 }
+
+.new-cabinet {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.new-cabinet label {
+  margin: 0;
+}
+
+.new-cabinet input {
+  padding-left: 10px;
+  border: 1px solid #0398fd;
+  -webkit-box-shadow: inset 0px 0px 2.57px 1.43px #0398fd;
+          box-shadow: inset 0px 0px 2.57px 1.43px #0398fd;
+  height: 30px;
+  width: 100px;
+}
+
+.new-cabinet .error input {
+  color: red;
+  -webkit-box-shadow: inset 0px 0px 2.57px 1.43px red;
+          box-shadow: inset 0px 0px 2.57px 1.43px red;
+  border: 1px solid red;
+}
+
+button.delete-new-cabinet {
+  background: red;
+  border: none;
+  cursor: pointer;
+}
+
+.cabinets-save-btn {
+  margin-bottom: 45px;
+}
 /*# sourceMappingURL=cabinets-page.css.map */

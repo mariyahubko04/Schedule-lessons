@@ -78,3 +78,37 @@
     }
   }
 }
+
+.new-cabinet {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  label {
+    margin: 0;
+  }
+
+  input {
+    padding-left: 10px;
+    border: 1px solid #0398fd;
+    box-shadow: inset 0px 0px 2.57px 1.43px $additional-color;
+    height: 30px;
+    width: 100px;
+  }
+  .error input {
+    color: red;
+    box-shadow: inset 0px 0px 2.57px 1.43px red;
+    border: 1px solid red;
+
+  }
+}
+
+button.delete-new-cabinet {
+  background: red;
+  border: none;
+  cursor: pointer;
+}
+
+.cabinets-save-btn {
+  margin-bottom: 45px;
+}
