@@ -199,7 +199,7 @@ const SheduleEditBlock = ({ isAdmin, groups, prevSubjects, prevCabinets, prevTea
             onClick={() => handleNexDay(false)}
           />}
 
-          {lessonTypes.length > 0 && <OneDayShedule
+          {<OneDayShedule
               isActive={true}
               isSave={isSave}
               isEdit={isEdit}
