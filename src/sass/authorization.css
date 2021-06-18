@@ -13,13 +13,18 @@
 .authorization-block__form--field-label {
   row-gap: 8px;
   margin: 0;
+  -ms-grid-column-align: start;
+      justify-self: start;
+  width: 100%;
+  max-width: 270px;
 }
 
 .authorization-block__form--field-label .academic-status, .authorization-block__form--field-label .groups {
   border: 1px solid #0398fd;
   -webkit-box-shadow: inset 0px 0px 3.57px 1.43px rgba(0, 0, 0, 0.35);
           box-shadow: inset 0px 0px 3.57px 1.43px rgba(0, 0, 0, 0.35);
-  width: 270px;
+  width: 100%;
+  max-width: 270px;
   font-weight: 500;
 }
 
@@ -27,10 +32,6 @@
   border: none;
   -webkit-box-shadow: none;
           box-shadow: none;
-}
-
-.authorization-block__form--field-label .academic-status .css-1xqm9c7-singleValue, .authorization-block__form--field-label .academic-status .css-1w7gl0u-Input, .authorization-block__form--field-label .groups .css-1xqm9c7-singleValue, .authorization-block__form--field-label .groups .css-1w7gl0u-Input {
-  margin-left: 15px !important;
 }
 
 .authorization-block__form--field input:not([type='checkbox']), .authorization-block__form--field .academic-status, .authorization-block__form--field .groups {

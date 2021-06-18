@@ -12,20 +12,20 @@
     &-label {
       row-gap: 8px;
       margin: 0;
+      justify-self: start;
+      width: 100%;
+      max-width: 270px;
 
       .academic-status, .groups {
         border: 1px solid $additional-color;
         box-shadow: inset 0px 0px 3.57px 1.43px rgba(0, 0, 0, 0.35);
-        width: 270px;
+        width: 100%;
+        max-width: 270px;
         font-weight: 500;
 
         input {
           border: none;
           box-shadow: none;
-        }
-
-        .css-1xqm9c7-singleValue, .css-1w7gl0u-Input {
-          margin-left: 15px !important;
         }
       }
     }

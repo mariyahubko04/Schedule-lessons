@@ -211,8 +211,9 @@ const RegistrationForm = ({ groups, setLoginStatus, dispatch }) => {
               onChange={e => setPasswordConfitmation(e.target.value)}
             />
           </label>
+        </div>
 
-          {!isTeacher ?
+        {!isTeacher ?
             <div className="authorization-block__form--field-label">
               Оберіть групу
               <Select
@@ -238,7 +239,6 @@ const RegistrationForm = ({ groups, setLoginStatus, dispatch }) => {
               />
             </div>
           }
-        </div>
 
         <div className='error-text'>
           {error}
