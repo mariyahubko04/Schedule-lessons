@@ -10,7 +10,7 @@ export const ProfilePage = ({ groups, academicStatus, typeLessons }) => {
   return <div className='profile-page'>
     <div className="header__additional-block" />
 
-    {role === 'admin' && groups && <AdminProfilePage groups={groups} typeLessons={typeLessons}/>}
+    {role === 'admin' && groups && <AdminProfilePage groups={groups} typeLessons={typeLessons} academicStatusFromServer={academicStatus}/>}
     {(role === 'student' || role === 'teacher') && groups && <StudentOrTeacherProfilePage groups={groups} academicStatus={academicStatus}/>}
   </div>;
 }

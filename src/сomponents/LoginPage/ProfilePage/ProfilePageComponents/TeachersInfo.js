@@ -9,6 +9,7 @@ const TeachersInfo = ({ prevTeachers, academicStatus, dispatch }) => {
   const [teachers, setTeachersInfo] = useState(prevTeachers);
   const [error, setError] = useState('');
   const [isSuccess, setIsSuccess]= useState(false);
+  console.log('academicStatus', academicStatus);
 
   const setUpdatedTeachers = (newValue, id) => {
     const updatedTeachers = teachers.map(item => {

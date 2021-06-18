@@ -14,11 +14,10 @@ import {
     getAllCabinets,
     getAllLessonTypes,
     getAllAcademicStatus,
-    getGroups
 } from "../../../../actions/shedule";
 
 
-const AdminProfilePage = ({ groups, dataFromStore, typeLessons, dispatch }) => {
+const AdminProfilePage = ({ groups, dataFromStore, typeLessons, academicStatusFromServer, dispatch }) => {
     const [activeMenu, setActiveMenu] = useState(1);
     const [data, setData] = useState({});
     const { subjects, teachers, cabinets, lessonTypes, academicStatus } = data;
@@ -49,7 +48,11 @@ const AdminProfilePage = ({ groups, dataFromStore, typeLessons, dispatch }) => {
 
     useEffect(() => { getAllData() }, []);
 
-    useEffect(() => setData({ ...dataFromStore, lessonTypes: typeLessons }), [dataFromStore]);
+    useEffect(() => setData({ 
+        ...dataFromStore,
+        academicStatus: academicStatusFromServer.map(item => ({id: item.value, name: item.label})),
+        lessonTypes: typeLessons
+    }), [dataFromStore]);
 
     return (
         <div className="profile">
@@ -57,7 +60,7 @@ const AdminProfilePage = ({ groups, dataFromStore, typeLessons, dispatch }) => {
 
             {activeMenu === 1 && <BotsPage />}
             {activeMenu === 2 && groups && <UserInfo groups={groups} />}
-            {activeMenu === 3 && teachers &&
+            {activeMenu === 3 && teachers && academicStatus &&
                 <TeachersInfo prevTeachers={teachers} academicStatus={academicStatus} />
             }
             {activeMenu === 4 && groups && subjects &&
@@ -91,7 +94,6 @@ const mapStateToProps = (state) => {
             subjects,
             teachers,
             cabinets,
-            academicStatus
         },
         groupsFromStore: groups,
     };
