@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "7463b48565c87e3ad92455bd20092a70",
+    "revision": "2b2f749777621e3f8b7269897f73c86d",
     "url": "/Schedule-lessons/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/Schedule-lessons/static/css/2.ab2304d9.chunk.css"
   },
   {
-    "revision": "0d551d0bd45391a18324",
+    "revision": "b71c4f06eaf09e1544f7",
     "url": "/Schedule-lessons/static/css/main.93f40613.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/Schedule-lessons/static/js/2.5709c354.chunk.js"
   },
   {
-    "revision": "0d551d0bd45391a18324",
-    "url": "/Schedule-lessons/static/js/main.d0352765.chunk.js"
+    "revision": "b71c4f06eaf09e1544f7",
+    "url": "/Schedule-lessons/static/js/main.78702238.chunk.js"
   },
   {
     "revision": "725c423d3525bded8e43",
