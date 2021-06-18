@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PhoneInput from 'react-phone-number-input/input';
 import Select from "react-select";
+import { connect } from 'react-redux';
 
-import { setProfileInfo } from '../../../../api/getDates';
+import { setProfileInfo } from '../../../../actions/user';
 
 const customStyles = (height, background) => ({
     control: (provided, state) => ({
@@ -43,7 +44,7 @@ const customStyles = (height, background) => ({
     })
   });
 
-export const UserInfo = ({ groups, academicStatus }) => {
+const UserInfo = ({ groups, academicStatus, userInfoFromStore, dispatch }) => {
     const user = sessionStorage.getItem('user');
     const userInfo= JSON.parse(user);
     const [firstname, setFirstname] = useState(userInfo.firstname);
@@ -53,7 +54,9 @@ export const UserInfo = ({ groups, academicStatus }) => {
     const [password, setPassword] = useState("");
     const [passwordConfitmation, setPasswordConfitmation] = useState("");
     const [academStatusId, setAcademStatusId] = useState({value: '', label: ''});
-    const [groupId, setGroupId] = useState(groups.find(item => item.id === userInfo.role.id));
+    const [groupId, setGroupId] = useState(groups[0]);
+    const [error, setError] = useState('');
+    const [isSuccess, setIsSuccess] = useState(false);
     const isTeacher = userInfo.role === 'teacher';
     const isStudent = userInfo.role === 'student';
 
@@ -70,11 +73,28 @@ export const UserInfo = ({ groups, academicStatus }) => {
             if (isTeacher) req['academ_status_id'] = academicStatus;
             if (isStudent) req['group_id'] = groupId;
 
-            const result = await setProfileInfo(req);
+            await dispatch(setProfileInfo(req));
+            setIsSuccess(true);
         } catch(err) {
+            setError(err.toString().replace('Error:', ''));
             console.error(err);
         }
     };
+
+    useEffect(() => {
+        const { firstname, lastname, middlename, email } = userInfoFromStore;
+        setFirstname(userInfoFromStore.firstname);
+        setLastname(userInfoFromStore.lastname);
+        setMiddlename(userInfoFromStore.middlename);
+        setEmail(userInfoFromStore.email);
+
+        sessionStorage.setItem("user", JSON.stringify({ ...userInfo, firstname, lastname, middlename, email }));
+    }, [userInfoFromStore]);
+
+    useEffect(() => {
+        if(error) setError('');
+        if(isSuccess) setIsSuccess(false);
+    }, [firstname, lastname, middlename, email, password, passwordConfitmation, groupId, academicStatus]);
 
     return (
         <div className='user-page'>
@@ -188,6 +208,10 @@ export const UserInfo = ({ groups, academicStatus }) => {
                     }
                 </div>
 
+                <div className={isSuccess ? 'success-text' : `error-text`}>
+                    {isSuccess ? 'Дані успішно оновлені' : error}
+                </div>
+
                 <button
                     className="btn authorization-block__form--field-btn-login"
                     type="submit"
@@ -198,3 +222,12 @@ export const UserInfo = ({ groups, academicStatus }) => {
         </div>
     );
 };
+
+const mapStateToProps = (state) => {
+    return {
+        userInfoFromStore: state.users,
+    };
+};
+
+const connectedUserInfo = connect(mapStateToProps)(UserInfo);
+export { connectedUserInfo as UserInfo };

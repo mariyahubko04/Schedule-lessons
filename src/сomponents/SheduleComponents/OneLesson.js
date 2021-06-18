@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import Select from "react-select";
+import { connect } from 'react-redux';
 
-import { setNewLesson, editLesson, deleteLesson } from '../../api/getDates';
+import { setNewLesson, editLesson, deleteLesson } from '../../actions/shedule';
 
-export const OneLesson = ({ lesson, lessonInfo, isCancel, selectedGroup, isSave, isEdit, subjectNames, cabinets, teachers, lessonTypes, parity, week_day_id }) => {
+const OneLesson = ({ lesson, lessonInfo, isCancel, selectedGroup, isSave, isEdit, subjectNames, cabinets, teachers, lessonTypes, parity, week_day_id, dispatch }) => {
     const emptyValue = { value: null, label: "Пусто" };
     const { id, name, cabinet, teacher, lessonType } = lessonInfo || { name: '', cabinet: '', teacher: '', lessonType: '' };
     const [selectedName, setName] = useState(name || emptyValue);
@@ -44,7 +45,7 @@ export const OneLesson = ({ lesson, lessonInfo, isCancel, selectedGroup, isSave,
             try {
                 if (isSave) {
                     if(!selectedName.value && id) {
-                        await deleteLesson(id);
+                        await dispatch(deleteLesson(id));
                     }
 
                     if(!selectedName.value ||
@@ -68,9 +69,9 @@ export const OneLesson = ({ lesson, lessonInfo, isCancel, selectedGroup, isSave,
                     };
 
                     if (!id) {
-                        await setNewLesson(req);
+                        await dispatch(setNewLesson(req));
                     } else {
-                        await editLesson(id, req);
+                        await dispatch(editLesson(id, req));
                     }
                 }
             } catch (err) {
@@ -183,3 +184,6 @@ export const OneLesson = ({ lesson, lessonInfo, isCancel, selectedGroup, isSave,
         </div>
     );
 };
+
+const connectedOneLesson = connect()(OneLesson);
+export { connectedOneLesson as OneLesson };

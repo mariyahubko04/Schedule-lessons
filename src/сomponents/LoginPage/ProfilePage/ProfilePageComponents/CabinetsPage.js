@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { CabinetItem } from "./CabinetItem";
 
 export const CabinetsPage = ({ prevCabinets }) => {
-    const [cabinets, setCabinets] = useState(prevCabinets.data);
+    const [cabinets, setCabinets] = useState(prevCabinets);
     const [numbersFloor, setNumberLevel] = useState(0);
 
     const getCabinets = () => {

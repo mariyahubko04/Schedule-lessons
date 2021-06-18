@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { HashRouter, Route, Switch } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import './App.css';
 import { Login } from './сomponents/Login.jsx';
@@ -8,24 +9,33 @@ import { HomePage } from './сomponents/HomePage.jsx';
 import { NotFoundPage } from './сomponents/NotFoundPage.jsx';
 import { Header } from './сomponents/Header.jsx';
 import { ProfilePage } from './сomponents/LoginPage/ProfilePage/ProfilePage';
-import { getGroups  } from './api/getDates';
+import { getGroups, getAllAcademicStatus, getAllLessonTypes  } from './actions/shedule';
 
 class App extends Component {
   state = {
     groups: null,
+    academicStatus: [],
     isLogin: false,
+    typeLessons: [],
   };
 
   async componentDidMount() {
     try {
-      const groups = await getGroups();
+      const groups = await this.props.getGroups();
+      const academicStatus = await this.props.getAllAcademicStatus();
+      const typeLessons = await this.props.getAllLessonTypes();
 
       if (groups) {
         this.setState({
-          groups: groups.map((group) => {
+          groups: (groups || []).map((group) => {
             const { id, name, number } = group;
             return { value: id, label: `${name}-${number}` };
-          })
+          }),
+          academicStatus: (academicStatus  || []).map((group) => {
+            const { id, name } = group;
+            return { value: id, label: name };
+          }),
+          typeLessons:  typeLessons,
         });
       }
     } catch (err) {
@@ -38,7 +48,9 @@ class App extends Component {
   };
 
   render() {
-    const { groups, isLogin } = this.state;
+    const { groups, academicStatus, typeLessons, isLogin } = this.state;
+    const user = sessionStorage.getItem('user');
+    const { role } = user ? JSON.parse(user) : { role: null };
 
     return (
       <HashRouter>
@@ -53,8 +65,8 @@ class App extends Component {
             <Login groups={groups} setLogin={this.setLogin}/>
           </Route>
 
-          {isLogin && <Route path="/profile">
-            <ProfilePage groups={groups} isLogin={isLogin} />
+          {role && <Route path="/profile">
+            <ProfilePage groups={groups} academicStatus={academicStatus} typeLessons={typeLessons} isLogin={isLogin} />
           </Route>}
 
           <Route component={NotFoundPage} />
@@ -66,4 +78,10 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapDispatchToProps = dispatch => ({
+  getGroups: () => dispatch(getGroups()),
+  getAllAcademicStatus: () => dispatch(getAllAcademicStatus()),
+  getAllLessonTypes: () => dispatch(getAllLessonTypes())
+});
+
+export default connect(null, mapDispatchToProps)(App);

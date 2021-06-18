@@ -43,3 +43,13 @@ button:disabled {
 .container-error {
   margin: 0 50px 75px;
 }
+
+.error-text {
+  color: red;
+  display: block;
+  min-height: 25px;
+}
+
+.css-tlfecz-indicatorContainer {
+  padding: 0 8px !important;
+}

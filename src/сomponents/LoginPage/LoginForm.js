@@ -2,36 +2,35 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import RingLoader from "react-spinners/RingLoader";
+import { connect } from 'react-redux';
 
-import { setLogin } from '../../api/getDates';
+import { setLogin } from '../../actions/user';
 
-export const LoginForm = ({ setLoginStatus }) => {
+const LoginForm = ({ setLoginStatus, dispatch }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [isError, setIsError] = useState(false);
+  const [error, setError] = useState('');
   const [isProgress, setIsProgress] = useState(false);
   const history = useHistory();
 
   const handleLogin = async () => {
     try {
       setIsProgress(true);
-      const isLoginSucces = await setLogin({ email, password });
-
-      const { data } = isLoginSucces;
+      const data = await dispatch(setLogin({ email, password }));
       const { firstname, lastname, middlename, api_token, role } = data;
-      setLoginStatus(true);
       sessionStorage.setItem("user", JSON.stringify({ firstname, lastname, middlename, email: data.email, token: api_token, role: role.name }));
+      setLoginStatus(true);
       history.push('/profile');
     } catch (err) {
-      setIsError(true);
+      setError(err.toString().replace('Error:', ''));
       console.error(err);
     } finally {
       setIsProgress(false);
     }
   };
 
-  useEffect(() => setIsError(false), [email, password]);
+  useEffect(() => setError(''), [email, password]);
 
   return (
     <>
@@ -73,8 +72,8 @@ export const LoginForm = ({ setLoginStatus }) => {
             />
           </div>
 
-          <div className={`error-text ${isError ? 'show' : 'hidden'}`}>
-            Невірний логін або пароль
+          <div className={`error-text ${error ? 'show' : 'hidden'}`}>
+            {error}
         </div>
 
           <button
@@ -91,3 +90,6 @@ export const LoginForm = ({ setLoginStatus }) => {
     </>
   );
 };
+
+const connectedLoginForm = connect()(LoginForm);
+export { connectedLoginForm as LoginForm };

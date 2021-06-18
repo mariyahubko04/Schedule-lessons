@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
 
 import { OneDayShedule } from '../../../../SheduleComponents/OneDayShedule';
 import { SelectGroup } from '../../../../SheduleComponents/SelectGroup';
 import { WeeksBlock } from '../../../../SheduleComponents/WeeksBlock';
 
-import { getSheduleByGroup } from '../../../../../api/getDates';
+import { getSheduleByGroup } from '../../../../../actions/shedule';
 
 const days = {
   1: { label: "Понеділок", abbreviation: "Пн", value: 1 },
@@ -15,7 +16,7 @@ const days = {
   6: { label: "Субота", abbreviation: "Сб", value: 6 },
 };
 
-export const SheduleEditBlock = ({ isAdmin, groups, prevSubjects, prevCabinets, prevTeachers, prevLessonTypes }) => {
+const SheduleEditBlock = ({ isAdmin, groups, prevSubjects, prevCabinets, prevTeachers, prevLessonTypes, sheduleFromStore, dispatch }) => {
   const [selectedWeek, setSelectedWeek] = useState(1);
   const [selectedDay, setSelectedDay] = useState(1);
   const [selectedGroup, setSelectedGroup] = useState(groups[0]);
@@ -32,58 +33,62 @@ export const SheduleEditBlock = ({ isAdmin, groups, prevSubjects, prevCabinets, 
     if (!groupId ) return;
 
     try {
-      const sheduleByGroup = await getSheduleByGroup(groupId);
-      if (sheduleByGroup) {
-        const result = { 1: {}, 2: {} };
-
-        for (let i = 0; i < sheduleByGroup.length; i++) {
-          const lesson = sheduleByGroup[i];
-          const {
-            parity,
-            week_day,
-            lesson_number,
-            subject,
-            lesson_type,
-            teacher,
-            audience,
-            id
-          } = lesson;
-          const { day_number } = week_day;
-          const { academ_status, firstname, lastname, middlename } =
-            teacher;
-          if (!result[parity][day_number])
-            result[parity][day_number] = {};
-          result[parity][day_number][lesson_number] = {
-            id,
-            name: { value: (subject || {}).id, label: (subject || {}).name },
-            lessonType: { value: (lesson_type || {}).id, label: (lesson_type || {}).name },
-            teacher: {
-              status: { value: (academ_status || {}).id, label: (academ_status || {}).name },
-              fio: { value: (teacher || {}).id, label: `${firstname} ${middlename} ${lastname}` },
-            },
-            cabinet: { value: (audience || {}).id, label: (audience || {}).number },
-          };
-        }
-
-        setSheduleByGroup(result);
-      }
+      const sheduleByGroup = await dispatch(getSheduleByGroup(groupId));
+      getSheduleObj(sheduleByGroup);
     } catch (err) {
       console.error(err);
     }
   };
 
+  const getSheduleObj = (sheduleByGroup) => {
+    if (sheduleByGroup) {
+      const result = { 1: {}, 2: {} };
+
+      for (let i = 0; i < sheduleByGroup.length; i++) {
+        const lesson = sheduleByGroup[i];
+        const {
+          parity,
+          week_day,
+          lesson_number,
+          subject,
+          lesson_type,
+          teacher,
+          audience,
+          id
+        } = lesson;
+        const { day_number } = week_day;
+        const { academ_status, firstname, lastname, middlename } =
+          teacher;
+        if (!result[parity][day_number])
+          result[parity][day_number] = {};
+        result[parity][day_number][lesson_number] = {
+          id,
+          name: { value: (subject || {}).id, label: (subject || {}).name },
+          lessonType: { value: (lesson_type || {}).id, label: (lesson_type || {}).name },
+          teacher: {
+            status: { value: (academ_status || {}).id, label: (academ_status || {}).name },
+            fio: { value: (teacher || {}).id, label: `${firstname} ${middlename} ${lastname}` },
+          },
+          cabinet: { value: (audience || {}).id, label: (audience || {}).number },
+        };
+      }
+
+      setSheduleByGroup(result);
+    }
+  };
+
   const getSubjectsOptions = (subjects) => {
-    const { data } = subjects || {data: []};
+    const data = subjects || [];
     return data.map(item => ({ value: item.id, label: item.name }));
   };
 
   const getCabinetsOptions = (cabinets) => {
-    const { data } = cabinets || {data: []};
+    const data = cabinets || [];
     return data.map(item => ({ value: item.id, label: item.number }));
   };
 
   const getTeachersOptions = (teachers) => {
-    const { data } = teachers || {data: []};
+    const data = teachers || [];
     return data.map(item => ({ value: item.id, label: `${item.firstname} ${item.middlename} ${item.lastname} (${item.academ_status.name})` }));
   };
 
@@ -126,6 +131,8 @@ export const SheduleEditBlock = ({ isAdmin, groups, prevSubjects, prevCabinets, 
     setSelectedGroup(defoultGroup);
     getAllData();
   }, []);
+
+  useEffect(() => { getSheduleObj(sheduleFromStore); }, [sheduleFromStore]);
 
   useEffect(() => {
     // при выборе группы запрашиваем новое расписание
@@ -192,7 +199,7 @@ export const SheduleEditBlock = ({ isAdmin, groups, prevSubjects, prevCabinets, 
             onClick={() => handleNexDay(false)}
           />}
 
-          <OneDayShedule
+          {lessonTypes.length > 0 && <OneDayShedule
               isActive={true}
               isSave={isSave}
               isEdit={isEdit}
@@ -206,7 +213,7 @@ export const SheduleEditBlock = ({ isAdmin, groups, prevSubjects, prevCabinets, 
               week_day_id={selectedDay}
               parity={selectedWeek}
               selectedGroup={selectedGroup}
-          />
+          />}
 
           {!isEdit && <button
             className="next-btn"
@@ -215,3 +222,13 @@ export const SheduleEditBlock = ({ isAdmin, groups, prevSubjects, prevCabinets, 
       </div>
   );
 };
+
+const mapStateToProps = (state) => {
+  return {
+    sheduleFromStore: state.shedule.shedules,
+    groupsFromStore: state.shedule.groups
+  };
+};
+
+const connectedSheduleEditBlock = connect(mapStateToProps)(SheduleEditBlock);
+export { connectedSheduleEditBlock as SheduleEditBlock };

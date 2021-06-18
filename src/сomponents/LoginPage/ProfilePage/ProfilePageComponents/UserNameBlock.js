@@ -1,14 +1,20 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { connect } from 'react-redux'; 
 
-export const UserNameBlock = () => {
+const UserNameBlock = ({ userInfoFromStore }) => {
     const user = sessionStorage.getItem("user");
-    const { firstname, lastname, middlename, role } = JSON.parse(user);
+    const [data, setData] = useState(userInfoFromStore.firstname ? userInfoFromStore : JSON.parse(user));
+    const { firstname, lastname, middlename, role } = data;
     const roleTranslated =
         role === "admin"
             ? "Адміністратор"
             : role === "teacher"
             ? "Викладач"
             : "Студент";
+    
+    useEffect(() => {
+        setData(userInfoFromStore);
+    }, [userInfoFromStore]);
 
     return (
         <div className="user-block">
@@ -28,3 +34,12 @@ export const UserNameBlock = () => {
         </div>
     );
 };
+
+const mapStateToProps = (state) => {
+    return {
+        userInfoFromStore: state.users,
+    };
+};
+
+const connectedUserNameBlock = connect(mapStateToProps)(UserNameBlock);
+export { connectedUserNameBlock as UserNameBlock };

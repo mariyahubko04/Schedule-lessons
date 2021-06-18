@@ -1,6 +1,5 @@
 import React from "react";
 
-import { ExitBtn } from "../ProfilePageComponents/ExitBtn";
 import { UserNameBlock } from "../ProfilePageComponents/UserNameBlock";
 
 export const MenuBlock = ({ activeMenu, setActiveMenu }) => {

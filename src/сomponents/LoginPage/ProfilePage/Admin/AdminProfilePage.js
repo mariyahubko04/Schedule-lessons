@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { connect } from 'react-redux';
 
 import { MenuBlock } from "./MenuBlock";
 import { SheduleEditBlock } from "./AdminProfilePageComponents/SheduleEditBlock";
@@ -12,11 +13,12 @@ import {
     getAllTeachers,
     getAllCabinets,
     getAllLessonTypes,
-    getAllAcademicStatus
-} from "../../../../api/getDates";
-import { useEffect } from "react";
+    getAllAcademicStatus,
+    getGroups
+} from "../../../../actions/shedule";
 
-export const AdminProfilePage = ({ groups }) => {
+
+const AdminProfilePage = ({ groups, dataFromStore, typeLessons, dispatch }) => {
     const [activeMenu, setActiveMenu] = useState(1);
     const [data, setData] = useState({});
     const { subjects, teachers, cabinets, lessonTypes, academicStatus } = data;
@@ -25,11 +27,11 @@ export const AdminProfilePage = ({ groups }) => {
         try {
             const [subjects, teachers, cabinets, lessonTypes, academicStatus] =
                 await Promise.all([
-                    getAllSubjects(),
-                    getAllTeachers(),
-                    getAllCabinets(),
-                    getAllLessonTypes(),
-                    getAllAcademicStatus()
+                    dispatch(getAllSubjects()),
+                    dispatch(getAllTeachers()),
+                    dispatch(getAllCabinets()),
+                    dispatch(getAllLessonTypes()),
+                    dispatch(getAllAcademicStatus())
                 ]);
 
             const data = {
@@ -47,6 +49,8 @@ export const AdminProfilePage = ({ groups }) => {
 
     useEffect(() => { getAllData() }, []);
 
+    useEffect(() => setData({ ...dataFromStore, lessonTypes: typeLessons }), [dataFromStore]);
+
     return (
         <div className="profile">
             <MenuBlock activeMenu={activeMenu} setActiveMenu={setActiveMenu} />
@@ -54,7 +58,7 @@ export const AdminProfilePage = ({ groups }) => {
             {activeMenu === 1 && <BotsPage />}
             {activeMenu === 2 && groups && <UserInfo groups={groups} />}
             {activeMenu === 3 && teachers &&
-                <TeachersInfo prevTeachers={teachers.data} academicStatus={academicStatus} />
+                <TeachersInfo prevTeachers={teachers} academicStatus={academicStatus} />
             }
             {activeMenu === 4 && groups && subjects &&
                 <SheduleEditBlock
@@ -75,3 +79,23 @@ export const AdminProfilePage = ({ groups }) => {
         </div>
     );
 };
+
+const mapStateToProps = (state) => {
+    const { academicStatus,
+        cabinets,
+        subjects,
+        teachers, groups } = state.shedule;
+
+    return {
+        dataFromStore: {
+            subjects,
+            teachers,
+            cabinets,
+            academicStatus
+        },
+        groupsFromStore: groups,
+    };
+};
+
+const connectedAdminProfilePage = connect(mapStateToProps)(AdminProfilePage);
+export { connectedAdminProfilePage as AdminProfilePage };

@@ -1,8 +1,9 @@
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
+import { connect } from 'react-redux';
 
-import { getSheduleByGroup } from "../api/getDates";
+import { getSheduleByGroup } from "../actions/shedule";
 import { SelectGroup } from "./SheduleComponents/SelectGroup";
 import { OneDayShedule } from './SheduleComponents/OneDayShedule';
 import { WeeksBlock } from './SheduleComponents/WeeksBlock';
@@ -16,7 +17,7 @@ const days = [
     "Субота",
 ];
 
-export const SheduleBlock = ({groups}) => {
+const SheduleBlock = ({ groups, dispatch }) => {
     const [selectedWeek, setSelectedWeek] = useState(1);
     const [selectedGroup, setSelectedGroup] = useState();
     const [sheduleByGroup, setSheduleByGroup] = useState({ 1: {}, 2: {} });
@@ -28,7 +29,7 @@ export const SheduleBlock = ({groups}) => {
         if (!groupId) return;
 
         try {
-            const sheduleByGroup = await getSheduleByGroup(groupId);
+            const sheduleByGroup = await dispatch(getSheduleByGroup(groupId));
             if (sheduleByGroup) {
                 const result = { 1: {}, 2: {} };
 
@@ -125,3 +126,6 @@ export const SheduleBlock = ({groups}) => {
         </div>
     );
 };
+
+const connectedheduleBlock = connect()(SheduleBlock);
+export { connectedheduleBlock as SheduleBlock };

@@ -3,8 +3,10 @@ import { useEffect } from "react";
 import PhoneInput from 'react-phone-number-input/input';
 import Select from "react-select"; 
 import { useHistory } from "react-router-dom";
+import { connect } from "react-redux";
 
-import { getAllAcademicStatus, setRegistration } from '../../api/getDates';
+import { setRegistration } from '../../actions/user';
+import { getAllAcademicStatus } from '../../actions/shedule';
 
 const customStyles = (height, background) => ({
   control: (provided, state) => ({
@@ -45,7 +47,7 @@ const customStyles = (height, background) => ({
   })
 });
 
-export const RegistrationForm = ({ groups, setLoginStatus }) => {
+const RegistrationForm = ({ groups, setLoginStatus, dispatch }) => {
   const [firstname, setFirstname] = useState('');
   const [lastname, setLastname] = useState('');
   const [middlename, setMiddlename] = useState('');
@@ -62,14 +64,14 @@ export const RegistrationForm = ({ groups, setLoginStatus }) => {
   useEffect(() => {
     (async () => {
       try {
-        const academicStatus = await getAllAcademicStatus();
+        const academicStatus = await dispatch(getAllAcademicStatus());
 
-        const academicStatusOptions = academicStatus.data.map(item => ({ value: item.id, label: item.name }));
+        const academicStatusOptions = academicStatus.map(item => ({ value: item.id, label: item.name }));
         setAcademicStatus(academicStatusOptions);
         setAcademStatusId(academicStatusOptions[0]);
       } catch (err) {
         if(err) setError(JSON.stringify(err));
-        console.log(err);
+        console.error(err);
       }
     })();
   }, [])
@@ -92,13 +94,13 @@ export const RegistrationForm = ({ groups, setLoginStatus }) => {
     }
 
     try {
-      const data = await setRegistration(req);
-      const { firstname, lastname, middlename, api_token, role } = data.data;
-      setLoginStatus(true);
+      const data = await dispatch(setRegistration(req));
+      const { firstname, lastname, middlename, api_token, role } = data;
       sessionStorage.setItem("user", JSON.stringify({ firstname, lastname, middlename, email: data.email, token: api_token, role: role.name }));
+      setLoginStatus(true);
       history.push('/profile');
     } catch(err) {
-      setError(JSON.stringify(err.message));
+      setError(err.toString().replace('Error:', ''));
       console.error(err);
     }
   };
@@ -252,3 +254,7 @@ export const RegistrationForm = ({ groups, setLoginStatus }) => {
     </div>
   );
 };
+
+
+const connectedRegistrationForm = connect()(RegistrationForm);
+export { connectedRegistrationForm as RegistrationForm };

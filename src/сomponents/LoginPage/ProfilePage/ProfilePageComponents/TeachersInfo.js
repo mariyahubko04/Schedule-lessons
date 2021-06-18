@@ -1,26 +1,23 @@
 import React from 'react';
 import { useState } from 'react';
+import { connect } from "react-redux";
 
 import { TeacherItem } from './TeacherItem';
+import { deleteUsers, editTeachers } from '../../../../actions/shedule';
 
-export const TeachersInfo = ({ prevTeachers, academicStatus }) => {
+const TeachersInfo = ({ prevTeachers, academicStatus, dispatch }) => {
   const [teachers, setTeachersInfo] = useState(prevTeachers);
-  const [newTeachers, setNewTeachersInfo] = useState([]);
+  const [error, setError] = useState('');
+  const [isSuccess, setIsSuccess]= useState(false);
 
   const setUpdatedTeachers = (newValue, id) => {
     const updatedTeachers = teachers.map(item => {
-      if (item.id !== id) return { ...item, ...newValue };
+      if (item.id === id) return { ...item, ...newValue };
       return item;
     });
     setTeachersInfo(updatedTeachers);
-  };
-
-  const setUpdatedNewTeachers = (newValue, id) => {
-    const updatedTeachers = newTeachers.map(item => {
-      if (item.id !== id) return { ...item, ...newValue };
-      return item;
-    });
-    setNewTeachersInfo(updatedTeachers);
+    if(isSuccess) setIsSuccess(false);
+    if(error) setError('');
   };
 
   const deleteTeacher = (id) => {
@@ -28,25 +25,40 @@ export const TeachersInfo = ({ prevTeachers, academicStatus }) => {
     setTeachersInfo(updatedTeachers);
   };
 
-  const deleteNewTeacher = (id) => {
-    const updatedTeachers = newTeachers.filter(item => item.id !== id);
-    setNewTeachersInfo(updatedTeachers);
-  };
-
-  const addNewTeacher = () => {
-    setNewTeachersInfo([...newTeachers, {
-      id: Date.now(),
-      firstname: '',
-      lastname: '',
-      middlename: '',
-      academ_status: (academicStatus.data || [])[0] || { id: '', name: ''},
-      email: ''
-    }]);
+  const saveTeacherInfo = async () => {      
+    try {
+      for (let i = 0; i < prevTeachers.length; i++) {
+        const prevTeacher = prevTeachers[i];
+        const nextTeacher = teachers.find(item => +item.id === +prevTeacher.id);
+  
+        if (!nextTeacher) {
+          await dispatch(deleteUsers(prevTeacher.id));
+          continue;
+        }
+  
+        if (nextTeacher.firstname !== prevTeacher.firstname ||
+          nextTeacher.lastname !== prevTeacher.lastname ||
+          nextTeacher.middlename !== prevTeacher.middlename ||
+          nextTeacher.academ_status.id !== prevTeacher.academ_status.id
+        ) {
+          const req = {
+            firstname: nextTeacher.firstname,
+            lastname: nextTeacher.lastname,
+            middlename: nextTeacher.middlename,
+            academ_status_id: nextTeacher.academ_status.id
+          };
+          await dispatch(editTeachers(prevTeacher.id, req));
+        }
+      }
+      setIsSuccess(true);
+    } catch (err) {
+      setError(error.toString());
+      console.error(err);
+    }
   };
 
   const isDisabled = () => {
-    return teachers.some(item => !item.firstname || !item.lastname || !item.middlename) ||
-      newTeachers.some(item => !item.firstname || !item.lastname || !item.middlename || !item.email);
+    return teachers.some(item => !item.firstname || !item.lastname || !item.middlename);
   };
 
   return <div className='teachers'>
@@ -59,31 +71,28 @@ export const TeachersInfo = ({ prevTeachers, academicStatus }) => {
         <TeacherItem
           key={`teacher-${item.id}`}
           prevTeacher={item}
-          academicStatus={academicStatus.data || []}
+          academicStatus={academicStatus || []}
           setUpdatedTeacher={setUpdatedTeachers}
           deleteTeacher={deleteTeacher}
         />
       )}
+    </div>
 
-      {newTeachers.map(item =>
-        <TeacherItem
-          key={`new-teacher-${item.id}`}
-          isNewTeacher={true}
-          prevTeacher={item}
-          academicStatus={academicStatus.data || []}
-          setUpdatedTeacher={setUpdatedNewTeachers}
-          deleteTeacher={deleteNewTeacher}
-        />
-      )}
+    <div className={isSuccess ? 'success-text' : `error-text`}>
+        {isSuccess ? 'Дані успішно оновлені' : error}
     </div>
 
     <div className='btn-block'>
         <button
           className="teachers-save-btn"
           disabled={isDisabled()}
+          onClick={saveTeacherInfo}
         >
           Зберегти
         </button>
     </div>
   </div>;
 };
+
+const connectedTeachersInfo = connect()(TeachersInfo);
+export { connectedTeachersInfo as TeachersInfo };

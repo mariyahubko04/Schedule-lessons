@@ -69,6 +69,11 @@ export const TeacherItem = ({ isNewTeacher, prevTeacher, academicStatus, deleteT
     setUpdatedTeacher({ email: value }, id)
   };
 
+  const setNewStatus = (value) => {
+    setStatus(value);
+    setUpdatedTeacher({ academ_status: { id: value.value, name: value.label } }, id);
+  }
+
   return <div className='one-teacher'>
     <div key={item.id} className='teachers-block__item'>
       <input
@@ -93,7 +98,7 @@ export const TeacherItem = ({ isNewTeacher, prevTeacher, academicStatus, deleteT
     <div className='teachers-info'>
       <Select
         value={status}
-        onChange={setStatus}
+        onChange={setNewStatus}
         options={optionsStatus}
         id={"status"}
         className="status"

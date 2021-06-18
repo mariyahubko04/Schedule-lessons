@@ -4,6 +4,7 @@ import { NavLink, useHistory } from 'react-router-dom';
 
 export const Header = ({ isLogin, setLoginStatus }) => {
   const history = useHistory();
+  const user = sessionStorage.getItem('user');
 
   const setLogin = () => {
     setLoginStatus(false);
@@ -38,7 +39,7 @@ return <header className='header'>
           </NavLink>
         </li>
 
-        {isLogin && 
+        {(isLogin || user) && 
             <li className='header__block--navbar--link flex-center profile-btn'>
             <NavLink className="navlink" to="/profile" exact>
               Особистий кабінет
@@ -48,7 +49,7 @@ return <header className='header'>
 
         <li className='header__block--navbar--link login-link flex-center'>
           <button className="navlink" onClick={setLogin}>
-            {isLogin ? 'Вийти' : 'Вхід'}
+            {(isLogin || user) ? 'Вийти' : 'Вхід'}
           </button>
         </li>
       </ul>
