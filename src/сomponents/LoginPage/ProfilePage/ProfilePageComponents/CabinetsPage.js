@@ -78,7 +78,7 @@ const CabinetsPage = ({ prevCabinets, dispatch }) => {
     };
 
     const isDisabled = () => {
-        return newCabinets.some(item => !item.number);
+        return newCabinets.some(item => !item.number || item < 100 || item > 999);
     };
 
     useEffect(() => {

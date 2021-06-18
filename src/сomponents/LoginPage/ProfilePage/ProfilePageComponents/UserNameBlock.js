@@ -3,10 +3,11 @@ import { connect } from 'react-redux';
 
 const UserNameBlock = ({ userInfoFromStore }) => {
     const user = sessionStorage.getItem("user");
+    console.log('userInfoFromStore', userInfoFromStore, user);
     const [data, setData] = useState(userInfoFromStore.firstname ? userInfoFromStore : JSON.parse(user));
     const { firstname, lastname, middlename, role } = data;
     const roleTranslated =
-        role === "admin"
+        (typeof role === 'string' ? role : role.name) === "admin"
             ? "Адміністратор"
             : role === "teacher"
             ? "Викладач"
