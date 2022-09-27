@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const URL = 'https://easyschedule.tk/api';
+const URL = 'https://schedule-back.tk/web-schedule/api';
 
 axios.defaults.baseURL = URL;
 
